@@ -23,23 +23,41 @@ export class AddTrainedEmployeeComponent implements OnInit {
   plans = [];
 
   save(){
-    console.log(this.trainedEmployee);
-    this.myHttp.postData('http://localhost:3000/trained-employee',this.trainedEmployee).subscribe(
-  		(data:any) => {
-        this.router.navigate(['/trained-employee']);
+    if(this.route.snapshot.params['id']){
+      this.myHttp.putData('http://localhost:3000/trained-employee/'+this.route.snapshot.params['id'], this.trainedEmployee).subscribe(
+  		  (data:any) => {
+          this.router.navigate(['/trained-employee']);
+        }
+      )
     }
-  )}
+    else{
+      console.log(this.trainedEmployee);
+      this.myHttp.postData('http://localhost:3000/trained-employee',this.trainedEmployee).subscribe(
+  		  (data:any) => {
+          this.router.navigate(['/trained-employee']);
+        }
+      )
+    }    
+  }
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/employee/all').subscribe(
-  		(employees:any) => {
+
+    if(this.route.snapshot.params['id']){ 
+      this.myHttp.getDataObservable('http://localhost:3000/employee/'+this.route.snapshot.params['id']).subscribe((data:any) => {
+        console.log(data);
+        this.trainedEmployee.trainee = data.plan;
+        this.trainedEmployee.plan = data.trainee;
+        this.trainedEmployee.trainingCompleted = data.trainingCompleted;
+      })
+    }else{
+      this.myHttp.getDataObservable('http://localhost:3000/employee/all').subscribe(
+       (employees:any) => {
         this.employees = employees;
         this.myHttp.getDataObservable('http://localhost:3000/plan/all').subscribe(
           (plans:any) => {
             this.plans = plans;
-            console.log(plans);
           }
-        )
-      }
-	  )
+        )        
+      })
+    }    
   }
 }

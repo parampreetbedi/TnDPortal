@@ -11,7 +11,7 @@ import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddPlanComponent implements OnInit {
 
- plan:any = {
+  plan:any = {
   	tech:"",
   	startDate:{year:0,month:0,day:0},
   	trainer:"",
