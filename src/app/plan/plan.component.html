@@ -1,0 +1,23 @@
+<button style="float:right; margin: 10px 0" routerLink='/plan/add' class="btn btn-primary">Add Plan</button>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Technology</th>
+      <th>Trainer</th>
+      <!-- <th>Trainees</th> -->
+      <th>Starting From</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pl of plan; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{pl.tech.name}}</td>
+      <td>{{pl.trainer.name}}</td>
+      <!-- <td>{{pl.trainee.length}}</td> -->
+      <td>{{pl.startDate | date}}</td>
+      <td><a routerLink="edit/{{pl._id}}">Edit</a> <a style="cursor:pointer" (click)="delete(pl._id,i)" routerLink="/plan">Delete</a></td>
+    </tr>
+  </tbody>
+</table>

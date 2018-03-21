@@ -1,0 +1,22 @@
+<button style="float:right; margin: 10px 0" (click)="router.navigate(['/trained-employee/add'])"
+class="btn btn-primary">Add Trained Employee</button>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Plan</th>
+      <th>Date</th>
+      <th>Class Conducted</th>
+      <th>Trainees Present</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let te of trainedEmployees; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{te.plan}}</td>
+      <td>{{te.date}}</td>
+      <td>{{te.classConducted}}</td>
+      <td><a routerLink="edit/{{te._id}}">Edit</a></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+  <span class="navbar-toggler-icon"></span>
+</button>
+  <a class="navbar-brand" routerLink="" href="/">Training And Development</a>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="" href="/">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/technology" href="/">Technology</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/plan" href="/">Training Plan</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/employee" href="/">Employee</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/attendance" href="/">Attendance</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/trained-employee" href="/">Trainings</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a style="cursor:pointer;"  class="nav-link" (click)="logout()">Logout</a></li>
+    </ul>   
+  </div>
+</nav>

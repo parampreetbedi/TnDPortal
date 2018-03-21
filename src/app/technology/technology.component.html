@@ -1,0 +1,21 @@
+<button style="float:right; margin: 10px 0" routerLink="/technology/add"  class="btn btn-primary">Add Technology</button>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Intended For</th>
+      <th>Topics</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tech of technology; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{tech.name}}</td>
+      <td>{{tech.targetAudience==0? 'Experienced' : 'sDirect'}}</td>
+      <td>{{tech.topics.length}}</td>
+      <td><a routerLink="edit/{{tech._id}}">Edit</a> <a style="cursor:pointer" (click)="confirm(delete(tech._id,i))" routerLink="/technology">Delete</a></td>
+    </tr>
+  </tbody>
+</table>

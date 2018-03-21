@@ -1,0 +1,34 @@
+<form class="form-horizontal" (submit)="save()">
+  <fieldset style="width:500px">
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Name</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputEmail" name="name"  [(ngModel)]="tech.name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Email</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputEmail" name="email"  [(ngModel)]="tech.email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Department</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputEmail" name="dept"  [(ngModel)]="tech.dept">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Designation</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputEmail" name="designation"  [(ngModel)]="tech.designation">
+      </div>
+    </div>   
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default" (click)="router.navigate(['/employee'])">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="save()">Submit</button>
+      </div>
+    </div>    
+  </fieldset>
+</form>

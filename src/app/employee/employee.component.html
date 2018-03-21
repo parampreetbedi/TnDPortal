@@ -1,0 +1,21 @@
+<button style="float:right; margin: 10px 0" (click)="router.navigate(['/employee/add'])" class="btn btn-primary">Add Employee</button>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Designation</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let emp of employee; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{emp.name}}</td>
+      <td>{{emp.dept}}</td>
+      <td>{{emp.designation}}</td>
+      <td><a routerLink="edit/{{emp._id}}">Edit</a> <a style="cursor:pointer" (click)="delete(emp._id,i)" routerLink="/employee">Delete</a></td>
+    </tr>
+  </tbody>
+</table>

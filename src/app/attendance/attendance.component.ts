@@ -1,0 +1,25 @@
+import { Component, OnInit } from '@angular/core';
+import { MyHttpService } from './../shared/services/http.service';
+import { Router} from '@angular/router'
+
+@Component({
+  selector: 'app-attendance',
+  templateUrl: './attendance.component.html',
+  styleUrls: ['./attendance.component.css'],
+  providers:[MyHttpService]
+})
+export class AttendanceComponent implements OnInit {
+  attendance:any;
+  constructor(private myHttp: MyHttpService, public router:Router) { }
+
+  ngOnInit() {
+    this.myHttp.getDataObservable('http://localhost:3000/attendance/all').subscribe(
+        data => {
+          this.attendance = data;
+        }
+    );
+  }
+
+  
+
+}
