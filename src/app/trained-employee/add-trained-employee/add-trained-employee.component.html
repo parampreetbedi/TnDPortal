@@ -9,7 +9,7 @@
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label" >Plan</label>
       <div class="col-lg-10">
-        <select [(ngModel)]="trainedEmployee.trainee" name="trainee">
+        <select [(ngModel)]="trainedEmployee.plan" name="trainingPlan">
         	<option *ngFor="let pl of plans" value="{{pl._id}}">{{pl.tech.name}}</option>
         </select>
       </div>
@@ -17,7 +17,7 @@
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label" >Trainee</label>
       <div class="col-lg-10">
-        <select [(ngModel)]="trainedEmployee.plan" name="trainingPlan">
+        <select [(ngModel)]="trainedEmployee.trainee" name="trainee">
         	<option *ngFor="let emp of employees" value="{{emp._id}}">{{emp.name}}</option>
         </select>
       </div>

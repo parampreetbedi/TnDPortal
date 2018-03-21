@@ -5,17 +5,20 @@ class="btn btn-primary">Add Trained Employee</button>
     <tr>
       <th>#</th>
       <th>Plan</th>
-      <th>Date</th>
-      <th>Class Conducted</th>
-      <th>Trainees Present</th>
+      <th>Trainee Name</th>
+      <th>Training Status</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let te of trainedEmployees; let i = index">
       <td>{{i+1}}</td>
-      <td>{{te.plan}}</td>
-      <td>{{te.date}}</td>
-      <td>{{te.classConducted}}</td>
+      <td>{{te.plan.tech}}</td>
+      <td>{{te.trainee.name}}</td>     
+      <div [ngSwitch]="te.trainingCompleted">
+          <td *ngSwitchCase=0>ongoing</td>
+          <td *ngSwitchCase=1>completed</td>
+          <td *ngSwitchCase=2>upcoming</td>
+      </div>
       <td><a routerLink="edit/{{te._id}}">Edit</a></td>
     </tr>
   </tbody>
