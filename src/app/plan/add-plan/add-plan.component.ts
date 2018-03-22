@@ -14,8 +14,9 @@ export class AddPlanComponent implements OnInit {
   plan:any = {
   	tech:"",
   	startDate:{year:0,month:0,day:0},
-  	trainer:"",
-  	trainee:[]
+		trainer:"",
+		isCompleted:""
+  	//trainee:[]
   };
 
   newTech:Object;
@@ -24,9 +25,9 @@ export class AddPlanComponent implements OnInit {
   model: NgbDateStruct;
 
   constructor(private myHttp:MyHttpService, public router:Router, private route:ActivatedRoute) { }
-  addTrainee(){
-  	this.plan.trainee.push("");
-  }
+  // addTrainee(){
+  // 	this.plan.trainee.push("");
+  // }
   save(){  	
   	this.plan.startDate=this.plan.startDate.year+'-'+this.plan.startDate.month+'-'+this.plan.startDate.day;
   	//console.log("this.plan",this.plan)
@@ -63,12 +64,13 @@ export class AddPlanComponent implements OnInit {
 	          this.plan.startDate = new Date(data.startDate);
 	          this.plan.startDate = {year:this.plan.startDate.getFullYear(), month:this.plan.startDate.getMonth()+1, day:this.plan.startDate.getDate()}
 	          //console.log("this.plan.startDate",this.plan.startDate)
-	          this.plan.trainer = data.trainer._id;
-	          let a=[];
-	          for(let train of data.trainee){
-	          	a.push(train._id);
-	          }
-	          this.plan.trainee = a;
+						this.plan.trainer = data.trainer._id;
+						this.plan.isCompleted = data.isCompleted;
+	          // let a=[];
+	          // for(let train of data.trainee){
+	          // 	a.push(train._id);
+	          // }
+	          // this.plan.trainee = a;
 	        }
 	    );
   	}

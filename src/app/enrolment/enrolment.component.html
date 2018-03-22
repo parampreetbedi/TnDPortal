@@ -8,7 +8,6 @@
         <th>#</th>
         <th>Technology</th>
         <th>Trainer</th>
-        <th>Trainees</th>
         <th>Starting From</th>
         <th>Actions</th>
       </tr>
@@ -18,7 +17,6 @@
         <td>{{i+1}}</td>
         <td>{{pl.plan.tech.name}}</td>
         <td>{{pl.plan.trainer.name}}</td>
-        <td>{{pl.trainee.name}}</td>
         <td>{{pl.plan.startDate | date}}</td>
         <td><a style="cursor:pointer" (click)="enroll(pl._id)" routerLink="/">Enroll</a> <a style="cursor:pointer" (click)="delete(pl._id,i)" routerLink="/">Delete</a></td>
       </tr>
@@ -33,7 +31,7 @@
         <th>#</th>
         <th>Technology</th>
         <th>Trainer</th>
-        <th>Trainees</th>
+        <!-- <th>No. of Trainees</th> -->
         <th>Started on</th>
         <th>Completed on</th>
       </tr>
@@ -43,7 +41,7 @@
         <td>{{i+1}}</td>
         <td>{{pl.tech.name}}</td>
         <td>{{pl.trainer.name}}</td>
-        <td>{{pl.trainee.length}}</td>
+        <!-- <td>{{pl.trainee.length}}</td> -->
         <td>{{pl.startDate | date}}</td>
         <td>{{pl.endDate | date}}</td>
       </tr>
@@ -58,7 +56,7 @@
         <th>#</th>
         <th>Technology</th>
         <th>Trainer</th>
-        <th>Trainees</th>
+        <!-- <th>No. of Trainees</th> -->
         <th>Started on</th>
       </tr>
     </thead>
@@ -67,7 +65,7 @@
         <td>{{i+1}}</td>
         <td>{{pl.tech.name}}</td>
         <td>{{pl.trainer.name}}</td>
-        <td>{{pl.trainee.length}}</td>
+        <!-- <td>{{pl.trainee.length}}</td> -->
         <td>{{pl.startDate | date}}</td>
       </tr>
     </tbody>
@@ -81,7 +79,7 @@
         <th>#</th>
         <th>Technology</th>
         <th>Trainer</th>
-        <th>Trainees</th>
+        <!-- <th>No. of Trainees</th> -->
         <th>Starting From</th>
       </tr>
     </thead>
@@ -90,7 +88,7 @@
         <td>{{i+1}}</td>
         <td>{{pl.tech.name}}</td>
         <td>{{pl.trainer.name}}</td>
-        <td>{{pl.trainee.length}}</td>
+        <!-- <td>{{pl.trainee.length}}</td> -->
         <td>{{pl.startDate | date}}</td>
       </tr>
     </tbody>
