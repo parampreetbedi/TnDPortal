@@ -7,6 +7,7 @@ class="btn btn-primary">Add Trained Employee</button>
       <th>Plan</th>
       <th>Trainee Name</th>
       <th>Training Status</th>
+      <th>Options</th>
     </tr>
   </thead>
   <tbody>
@@ -19,7 +20,10 @@ class="btn btn-primary">Add Trained Employee</button>
           <td *ngSwitchCase=1>completed</td>
           <td *ngSwitchCase=2>upcoming</td>
       </div>
-      <td><a routerLink="edit/{{te._id}}">Edit</a></td>
+      <td>
+        <a routerLink="edit/{{te._id}}">Edit</a>
+        <a routerLink="add-feedback/{{te._id}}">Feedback & Rating</a>
+      </td>
     </tr>
   </tbody>
 </table>

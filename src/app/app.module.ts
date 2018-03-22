@@ -43,8 +43,8 @@ const childRoutes: Routes = [
 
 {path:'trained-employee', component:TrainedEmployeeComponent},
 {path:'trained-employee/add', component:AddTrainedEmployeeComponent},
-{path:'trained-employee/edit/:id', component:AddTrainedEmployeeComponent}
-
+{path:'trained-employee/edit/:id', component:AddTrainedEmployeeComponent},
+{path:'trained-employee/add-feedback-rating/:id', component:AddTrainedEmployeeComponent}
 ];
 
 const routes: Routes = [

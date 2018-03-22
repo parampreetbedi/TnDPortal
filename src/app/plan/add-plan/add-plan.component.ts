@@ -29,7 +29,7 @@ export class AddPlanComponent implements OnInit {
   }
   save(){  	
   	this.plan.startDate=this.plan.startDate.year+'-'+this.plan.startDate.month+'-'+this.plan.startDate.day;
-  	console.log("this.plan",this.plan)
+  	//console.log("this.plan",this.plan)
   	if(this.route.snapshot.params['id']){ 
 	  	this.myHttp.putData('http://localhost:3000/plan/'+this.route.snapshot.params['id'],this.plan).subscribe(
 	        data => {
@@ -58,10 +58,11 @@ export class AddPlanComponent implements OnInit {
   	if(this.route.snapshot.params['id']){ 
   		this.myHttp.getDataObservable('http://localhost:3000/plan/'+this.route.snapshot.params['id']).subscribe(
 	        (data:any) => {
+						//console.log(data);
 	          this.plan.tech = data.tech._id;
 	          this.plan.startDate = new Date(data.startDate);
 	          this.plan.startDate = {year:this.plan.startDate.getFullYear(), month:this.plan.startDate.getMonth()+1, day:this.plan.startDate.getDate()}
-	          console.log("this.plan.startDate",this.plan.startDate)
+	          //console.log("this.plan.startDate",this.plan.startDate)
 	          this.plan.trainer = data.trainer._id;
 	          let a=[];
 	          for(let train of data.trainee){
