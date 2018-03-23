@@ -19,8 +19,9 @@ export class EnrolmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/enrollment/all').subscribe(
+    this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
         data => {
+          //console.log(data);
           this.dashboard = data;
           this.myHttp.getDataObservable('http://localhost:3000/plan/completed').subscribe(
             completed => {
@@ -42,9 +43,9 @@ export class EnrolmentComponent implements OnInit {
         }
 
   delete(id){
-  	this.myHttp.deleteData('http://localhost:3000/enrollment/'+id).subscribe(
+  	this.myHttp.deleteData('http://localhost:3000/plan/'+id).subscribe(
         data => {
-        	this.myHttp.getDataObservable('http://localhost:3000/enrollment/all').subscribe(
+        	this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
 		        data1 => {
 		          this.dashboard = data1;
 		        }
@@ -54,14 +55,14 @@ export class EnrolmentComponent implements OnInit {
   }
 
   enroll(id) {
-    alert('http://localhost:3000/enrollment/enroll_in/'+id)
-    this.myHttp.getDataObservable('http://localhost:3000/enrollment/enroll_in/'+id).subscribe(
+    //alert('http://localhost:3000/plan/'+id)
+    this.myHttp.patchData('http://localhost:3000/plan/'+id,this.dashboard).subscribe(
         data1 => {
-          this.myHttp.getDataObservable('http://localhost:3000/enrollment/all').subscribe(
+          this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
             data2 => {
               this.dashboard = data2;
             }
-        );  
+          );  
         }
     );
   }

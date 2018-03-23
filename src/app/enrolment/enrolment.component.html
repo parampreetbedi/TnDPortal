@@ -1,7 +1,7 @@
 <!-- <button style="float:right; margin: 10px 0" routerLink='/plan/add' class="btn btn-primary">Add Plan</button> -->
 <div class="main-content">
   <div class="col-lg-6 col-md-6" *ngIf="dashboard">
-  <h2>Enrollments</h2>
+  <h2>Training Needed</h2>
     <table class="table table-striped table-hover " border="1|0">
     <thead>
       <tr>
@@ -15,10 +15,10 @@
     <tbody>
       <tr *ngFor="let pl of dashboard; let i = index">
         <td>{{i+1}}</td>
-        <td>{{pl.plan.tech.name}}</td>
-        <td>{{pl.plan.trainer.name}}</td>
-        <td>{{pl.plan.startDate | date}}</td>
-        <td><a style="cursor:pointer" (click)="enroll(pl._id)" routerLink="/">Enroll</a> <a style="cursor:pointer" (click)="delete(pl._id,i)" routerLink="/">Delete</a></td>
+        <td>{{pl.tech.name}}</td>
+        <td>{{pl.trainer.name}}</td>
+        <td>{{pl.startDate | date}}</td>
+        <td><a style="cursor:pointer" (click)="enroll(pl._id)" routerLink="/">Convert to Plan</a> <a style="cursor:pointer" (click)="delete(pl._id,i)" routerLink="/">Delete</a></td>
       </tr>
     </tbody>
     </table>

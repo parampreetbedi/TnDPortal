@@ -18,4 +18,7 @@ constructor(private http:HttpClient) {}
 	deleteData(url) {
 	  return this.http.delete(url);
 	}
+	patchData(url,data){
+		return this.http.patch(url,data);
+	}
 }

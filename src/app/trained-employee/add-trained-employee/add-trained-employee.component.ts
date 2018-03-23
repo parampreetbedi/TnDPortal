@@ -13,9 +13,9 @@ export class AddTrainedEmployeeComponent implements OnInit {
   trainedEmployee:any = {
     trainee:'',
     plan:'',
-    trainingCompleted:2
-    //starRating:,
-    //feedback:''
+    trainingCompleted:2,
+    starRating:null,
+    feedback:null
   }
   constructor( private myHttp:MyHttpService, public router:Router, private route:ActivatedRoute ) { }
 
@@ -24,8 +24,9 @@ export class AddTrainedEmployeeComponent implements OnInit {
 
   save(){
     if(this.route.snapshot.params['id']){
+      console.log(this.trainedEmployee);
       this.myHttp.putData('http://localhost:3000/trained-employee/'+this.route.snapshot.params['id'], this.trainedEmployee).subscribe(
-  		  (data:any) => {
+  		  (data:any) => {          
           this.router.navigate(['/trained-employee']);
         }
       )
@@ -47,15 +48,27 @@ export class AddTrainedEmployeeComponent implements OnInit {
         (plans:any) => {
           this.plans = plans;
         }
-      )        
+      )
     })
     if(this.route.snapshot.params['id']){ 
       this.myHttp.getDataObservable('http://localhost:3000/trained-employee/'+this.route.snapshot.params['id']).subscribe((data:any) => {
         //console.log(data);
+        //console.log(this.route);
         this.trainedEmployee.trainee = data.trainee._id;
         this.trainedEmployee.plan = data.plan._id;
         this.trainedEmployee.trainingCompleted = data.trainingCompleted;
+        if(data.starRating){
+          this.trainedEmployee.starRating = data.starRating
+        }
+        if(data.feedback){
+          this.trainedEmployee.feedback = data.feedback
+        }
       })
+      if(this.route.snapshot.routeConfig.path == 'trained-employee/add-feedback-rating/:id'){
+        //console.log('im in');
+        this.trainedEmployee.starRating = 5;
+        this.trainedEmployee.feedback = "good";
+      }
     }    
   }
 }

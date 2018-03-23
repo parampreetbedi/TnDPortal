@@ -15,7 +15,8 @@ export class AddPlanComponent implements OnInit {
   	tech:"",
   	startDate:{year:0,month:0,day:0},
 		trainer:"",
-		isCompleted:""
+		isCompleted:"",
+		type:""
   	//trainee:[]
   };
 
@@ -66,6 +67,7 @@ export class AddPlanComponent implements OnInit {
 	          //console.log("this.plan.startDate",this.plan.startDate)
 						this.plan.trainer = data.trainer._id;
 						this.plan.isCompleted = data.isCompleted;
+						this.plan.type = data.type;
 	          // let a=[];
 	          // for(let train of data.trainee){
 	          // 	a.push(train._id);
