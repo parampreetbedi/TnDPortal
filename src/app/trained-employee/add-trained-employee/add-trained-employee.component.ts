@@ -24,7 +24,7 @@ export class AddTrainedEmployeeComponent implements OnInit {
 
   save(){
     if(this.route.snapshot.params['id']){
-      console.log(this.trainedEmployee);
+      //console.log(this.trainedEmployee);
       this.myHttp.putData('http://localhost:3000/trained-employee/'+this.route.snapshot.params['id'], this.trainedEmployee).subscribe(
   		  (data:any) => {          
           this.router.navigate(['/trained-employee']);
