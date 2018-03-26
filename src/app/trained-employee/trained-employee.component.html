@@ -13,7 +13,7 @@ class="btn btn-primary">Recruit Trainee</button>
   <tbody>
     <tr *ngFor="let te of trainedEmployees; let i = index">
       <td>{{i+1}}</td>
-      <td>{{te.plan.tech}}</td>
+      <td>{{te.plan.tech.name}}</td>
       <td>{{te.trainee.name}}</td>     
       <div [ngSwitch]="te.trainingCompleted">
           <td *ngSwitchCase=0>ongoing</td>

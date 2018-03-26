@@ -56,6 +56,7 @@ export class EnrolmentComponent implements OnInit {
 
   enroll(id) {
     //alert('http://localhost:3000/plan/'+id)
+    this.dashboard.action = 'enroll';
     this.myHttp.patchData('http://localhost:3000/plan/'+id,this.dashboard).subscribe(
         data1 => {
           this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(

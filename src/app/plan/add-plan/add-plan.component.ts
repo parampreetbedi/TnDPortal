@@ -23,28 +23,54 @@ export class AddPlanComponent implements OnInit {
   newTech:Object;
   employee:any;
   technology:any;
-  model: NgbDateStruct;
-
+	model: NgbDateStruct;
+	updatePlanStatus = false;
+  planStatus:any;
   constructor(private myHttp:MyHttpService, public router:Router, private route:ActivatedRoute) { }
   // addTrainee(){
   // 	this.plan.trainee.push("");
-  // }
+	// }
+	checkPlanStatus(event:any){		
+		this.updatePlanStatus = true;
+		this.planStatus = event.target.value;
+	}
+
   save(){  	
   	this.plan.startDate=this.plan.startDate.year+'-'+this.plan.startDate.month+'-'+this.plan.startDate.day;
   	//console.log("this.plan",this.plan)
   	if(this.route.snapshot.params['id']){ 
 	  	this.myHttp.putData('http://localhost:3000/plan/'+this.route.snapshot.params['id'],this.plan).subscribe(
 	        data => {
-	        	this.router.navigate(['/plan']);
+						if(this.updatePlanStatus){
+							if(this.planStatus == 0){		//i.e ongoing
+								this.plan.action = 'start';			
+							}
+							else if(this.planStatus == 1){   //i.e. completed
+								this.plan.action = 'complete';
+							}
+							else if(this.planStatus == 2){   //i.e. upcoming
+								this.plan.action = 'upcoming';
+							}
+							this.myHttp.patchData('http://localhost:3000/plan/'+this.route.snapshot.params['id'],this.plan).subscribe(
+								data => {
+									this.updatePlanStatus = false;
+									this.router.navigate(['/plan']);
+								}
+							);
+						}
+						else{
+							this.router.navigate(['/plan']);
+						}
 	        }
-	    );
+			);
+			
 	}else{
 		this.myHttp.postData('http://localhost:3000/plan',this.plan).subscribe(
 	        data => {
 	        	this.router.navigate(['/plan']);
 	        }
 	    );
-	}
+		}
   }
   ngOnInit() {
   	this.myHttp.getDataObservable('http://localhost:3000/employee/all').subscribe(
@@ -56,7 +82,7 @@ export class AddPlanComponent implements OnInit {
 	        }
 		  );
         }
-	);
+		);
   	if(this.route.snapshot.params['id']){ 
   		this.myHttp.getDataObservable('http://localhost:3000/plan/'+this.route.snapshot.params['id']).subscribe(
 	        (data:any) => {

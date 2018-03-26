@@ -17,7 +17,7 @@ export class TrainedEmployeeComponent implements OnInit {
     this.myHttp.getDataObservable('http://localhost:3000/trained-employee/all').subscribe(
       data => {
         this.trainedEmployees = data;
-        console.log(data);
+        //console.log(data);
       }
     );
     

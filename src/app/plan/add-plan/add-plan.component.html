@@ -48,7 +48,7 @@
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label" >Is Completed</label>
       <div class="col-lg-10">
-        <select [(ngModel)]="plan.isCompleted" name="isCompleted">
+        <select [(ngModel)]="plan.isCompleted" name="isCompleted" (change)="checkPlanStatus($event)">
           <option value="2">Upcoming</option>
           <option value="0">Ongoing</option>
           <option value="1">Completed</option>          
