@@ -13,11 +13,11 @@ export class AddPlanComponent implements OnInit {
 
   plan:any = {
   	tech:"",
-  	startDate:{year:0,month:0,day:0},
+		startDate:{year:0,month:0,day:0},
+		endDate:0,//{year:0,month:0,day:0},
 		trainer:"",
 		isCompleted:"",
 		type:""
-  	//trainee:[]
   };
 
   newTech:Object;
@@ -36,8 +36,10 @@ export class AddPlanComponent implements OnInit {
 	}
 
   save(){  	
-  	this.plan.startDate=this.plan.startDate.year+'-'+this.plan.startDate.month+'-'+this.plan.startDate.day;
-  	//console.log("this.plan",this.plan)
+		this.plan.startDate=this.plan.startDate.year+'-'+this.plan.startDate.month+'-'+this.plan.startDate.day;
+		if(this.plan.endDate != 0){
+			this.plan.endDate=this.plan.endDate.year+'-'+this.plan.endDate.month+'-'+this.plan.endDate.day;
+		}		
   	if(this.route.snapshot.params['id']){ 
 	  	this.myHttp.putData('http://localhost:3000/plan/'+this.route.snapshot.params['id'],this.plan).subscribe(
 	        data => {
@@ -64,8 +66,8 @@ export class AddPlanComponent implements OnInit {
 	        }
 			);
 			
-	}else{
-		this.myHttp.postData('http://localhost:3000/plan',this.plan).subscribe(
+		}else{
+			this.myHttp.postData('http://localhost:3000/plan',this.plan).subscribe(
 	        data => {
 	        	this.router.navigate(['/plan']);
 	        }
@@ -85,21 +87,30 @@ export class AddPlanComponent implements OnInit {
 		);
   	if(this.route.snapshot.params['id']){ 
   		this.myHttp.getDataObservable('http://localhost:3000/plan/'+this.route.snapshot.params['id']).subscribe(
-	        (data:any) => {
-						//console.log(data);
-	          this.plan.tech = data.tech._id;
-	          this.plan.startDate = new Date(data.startDate);
-	          this.plan.startDate = {year:this.plan.startDate.getFullYear(), month:this.plan.startDate.getMonth()+1, day:this.plan.startDate.getDate()}
-	          //console.log("this.plan.startDate",this.plan.startDate)
-						this.plan.trainer = data.trainer._id;
-						this.plan.isCompleted = data.isCompleted;
-						this.plan.type = data.type;
-	          // let a=[];
-	          // for(let train of data.trainee){
-	          // 	a.push(train._id);
-	          // }
-	          // this.plan.trainee = a;
-	        }
+				(data:any) => {
+					this.plan.tech = data.tech._id;
+					this.plan.startDate = new Date(data.startDate);
+					this.plan.startDate = {year:this.plan.startDate.getFullYear(), month:this.plan.startDate.getMonth()+1, day:this.plan.startDate.getDate()}
+					if(data.endDate == 0){
+						this.plan.endDate = 0;
+					}
+					else{
+						this.plan.endDate = new Date(data.endDate);
+						this.plan.endDate = {
+							year:	this.plan.endDate.getFullYear(),
+							month:this.plan.endDate.getMonth()+1,
+							day:	this.plan.endDate.getDate()
+						}
+					}						
+					this.plan.trainer = data.trainer._id;
+					this.plan.isCompleted = data.isCompleted;
+					this.plan.type = data.type;
+					// let a=[];
+					// for(let train of data.trainee){
+					// 	a.push(train._id);
+					// }
+					// this.plan.trainee = a;
+				}
 	    );
   	}
   }

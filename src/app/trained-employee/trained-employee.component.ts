@@ -13,6 +13,18 @@ export class TrainedEmployeeComponent implements OnInit {
   trainedEmployees : any;
   constructor(private myHttp: MyHttpService, public router:Router, public route:ActivatedRoute ) { }
 
+  delete(id){
+  	this.myHttp.deleteData('http://localhost:3000/trained-employee/'+id).subscribe(
+  		data1 => {
+  			this.myHttp.getDataObservable('http://localhost:3000/trained-employee/all').subscribe(
+		        data => {
+		          this.trainedEmployees = data;
+		        }
+		    );
+  		}
+  	)
+  }
+
   ngOnInit() {
     this.myHttp.getDataObservable('http://localhost:3000/trained-employee/all').subscribe(
       data => {

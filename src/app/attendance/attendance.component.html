@@ -1,21 +1,26 @@
-<button style="float:right; margin: 10px 0" (click)="router.navigate(['/attendance/add'])" class="btn btn-primary">Add Attendance</button>
+<!-- <button style="float:right; margin: 10px 0" (click)="router.navigate(['/attendance/add'])" class="btn btn-primary">Add Attendance</button> -->
 <table class="table table-striped table-hover ">
   <thead>
     <tr>
       <th>#</th>
-      <th>Plan</th>
-      <th>Date</th>
-      <th>Class Conducted</th>
-      <th>Trainees Present</th>
+      <th>Technology</th>
+      <th>Trainer</th>
+      <th>Starting Date</th>
+      <th>Ending Date</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let att of attendance; let i = index">
+    <tr *ngFor="let plan of plans; let i = index">
       <td>{{i+1}}</td>
-      <td>{{att.plan}}</td>
-      <td>{{att.date}}</td>
-      <td>{{att.classConducted}}</td>
-      <td><a routerLink="edit/{{att._id}}">Edit</a></td>
+      <td>{{plan.tech}}</td>
+      <td>{{plan.trainer}}</td>
+      <td>{{plan.startDate}}</td>
+      <td>{{plan.endDate}}</td>
+      <td>
+        <a routerLink="add/{{plan._id}}">Add Attendance</a>
+        <a routerLink="edit/{{plan._id}}">Edit Attendance</a>
+        <a routerLink="view/{{plan._id}}">View Attendance</a>
+      </td>
     </tr>
   </tbody>
 </table>

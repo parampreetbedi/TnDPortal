@@ -10,13 +10,14 @@ import { Router} from '@angular/router'
 })
 export class AttendanceComponent implements OnInit {
   attendance:any;
+  plans:any;
   constructor(private myHttp: MyHttpService, public router:Router) { }
 
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/attendance/all').subscribe(
-        data => {
-          this.attendance = data;
-        }
+    this.myHttp.getDataObservable('http://localhost:3000/plan/ongoing').subscribe(
+      data => {
+        this.plans = data;
+      }
     );
   }
 

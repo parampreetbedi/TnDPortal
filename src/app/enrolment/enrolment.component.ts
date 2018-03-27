@@ -9,62 +9,59 @@ import { Router, ActivatedRoute } from '@angular/router'
 })
 export class EnrolmentComponent implements OnInit {
 
-
   dashboard:any;
   ongoing:any;
   completed:any;
   upcoming:any;
-  constructor(private myHttp: MyHttpService, public router:Router) { 
-  	
-  }
+  
+  constructor(private myHttp: MyHttpService, public router:Router) { }
 
   ngOnInit() {
     this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
-        data => {
-          //console.log(data);
-          this.dashboard = data;
-          this.myHttp.getDataObservable('http://localhost:3000/plan/completed').subscribe(
-            completed => {
-              this.completed = completed;
-                this.myHttp.getDataObservable('http://localhost:3000/plan/ongoing').subscribe(
-                  ongoing => {
-                    this.ongoing = ongoing;
-                    this.myHttp.getDataObservable('http://localhost:3000/plan/upcoming').subscribe(
-                      upcoming => {
-                        this.upcoming = upcoming;
-                      }
-                    );
+      data => {
+        this.dashboard = data;
+        this.myHttp.getDataObservable('http://localhost:3000/plan/completed').subscribe(
+          completed => {
+            this.completed = completed;
+            this.myHttp.getDataObservable('http://localhost:3000/plan/ongoing').subscribe(
+              ongoing => {
+                this.ongoing = ongoing;
+                this.myHttp.getDataObservable('http://localhost:3000/plan/upcoming').subscribe(
+                  upcoming => {
+                    this.upcoming = upcoming;
                   }
                 );
               }
-             );
-            }
-          );
-        }
+            );
+          }
+        );
+      }
+    );
+  }
 
   delete(id){
   	this.myHttp.deleteData('http://localhost:3000/plan/'+id).subscribe(
-        data => {
-        	this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
-		        data1 => {
-		          this.dashboard = data1;
-		        }
-		    );  
+      data => {
+        this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
+          data1 => {
+            this.dashboard = data1;
+            this.router.navigate(['/']);
+          }
+        );  
       }
     );
   }
 
   enroll(id) {
-    //alert('http://localhost:3000/plan/'+id)
-    this.dashboard.action = 'enroll';
-    this.myHttp.patchData('http://localhost:3000/plan/'+id,this.dashboard).subscribe(
-        data1 => {
-          this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
-            data2 => {
-              this.dashboard = data2;
-            }
-          );  
-        }
+    this.myHttp.patchData('http://localhost:3000/plan?id='+id+'&action=enroll',this.dashboard).subscribe(
+      data1 => {
+        this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
+          data2 => {
+            this.dashboard = data2;
+            this.router.navigate(['/']);
+          }
+        );  
+      }
     );
   }
 }
