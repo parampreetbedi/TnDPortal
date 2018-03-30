@@ -9,6 +9,15 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Type</label>
+      <div class="col-lg-10">
+        <select [(ngModel)]="plan.type" name="type">
+          <option value=1>Plan</option>
+          <option value=0>Need</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label" >Trainer</label>
       <div class="col-lg-10">
         <select [(ngModel)]="plan.trainer" name="trainer">
@@ -16,29 +25,19 @@
         </select>
       </div>
     </div>
-    <!-- <div class="form-group" *ngFor="let trainee of plan.trainee; let i = index">
-      <label for="inputEmail" class="col-lg-2 control-label" >Trainee</label>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Trainees</label>
       <div class="col-lg-10">
-        <select [(ngModel)]="plan.trainee[i]" name="trainer{{i}}">
+        <select [(ngModel)]="plan.trainees" name="trainees" multiple>
         	<option *ngFor="let emp of employee" value="{{emp._id}}">{{emp.name}}</option>
         </select>
       </div>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <button type="button" class="btn btn-default" (click)="addTrainee()">Add Trainee</button>
-        
       </div>
     </div> -->
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label" >Type</label>
-      <div class="col-lg-10">
-        <select [(ngModel)]="plan.type" name="type">
-          <option value="1">Plan</option>
-          <option value="0">Need</option>
-        </select>
-      </div>
-    </div>
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label" >Start Date</label>
       <div class="col-lg-10 col-lg-offset-2">
@@ -55,9 +54,9 @@
       <label for="inputEmail" class="col-lg-2 control-label" >Is Completed</label>
       <div class="col-lg-10">
         <select [(ngModel)]="plan.isCompleted" name="isCompleted" (change)="checkPlanStatus($event)">
-          <option value="2">Upcoming</option>
-          <option value="0">Ongoing</option>
-          <option value="1">Completed</option>          
+          <option value=2>Upcoming</option>
+          <option value=0>Ongoing</option>
+          <option value=1>Completed</option>          
         </select>
       </div>
     </div>    
