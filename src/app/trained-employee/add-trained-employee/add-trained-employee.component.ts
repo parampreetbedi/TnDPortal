@@ -57,18 +57,18 @@ export class AddTrainedEmployeeComponent implements OnInit {
         this.trainedEmployee.trainee = data.trainee._id;
         this.trainedEmployee.plan = data.plan._id;
         this.trainedEmployee.trainingCompleted = data.trainingCompleted;
-        if(data.starRating){
-          this.trainedEmployee.starRating = data.starRating
-        }
-        if(data.feedback){
-          this.trainedEmployee.feedback = data.feedback
-        }
+        // if(data.starRating){
+        //   this.trainedEmployee.starRating = data.starRating
+        // }
+        // if(data.feedback){
+        //   this.trainedEmployee.feedback = data.feedback
+        // }
       })
-      if(this.route.snapshot.routeConfig.path == 'trained-employee/add-feedback-rating/:id'){
-        //console.log('im in');
-        this.trainedEmployee.starRating = 5;
-        this.trainedEmployee.feedback = "good";
-      }
+      // if(this.route.snapshot.routeConfig.path == 'trained-employee/add-feedback-rating/:id'){
+      //   //console.log('im in');
+      //   this.trainedEmployee.starRating = 5;
+      //   this.trainedEmployee.feedback = "good";
+      // }
     }    
   }
 }

@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes}  from '@angular/router';
-
+import { RouterModule, Routes }  from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -14,7 +12,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AddTechnologyComponent } from './technology/add-technology/add-technology.component';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
 import { AddPlanComponent } from './plan/add-plan/add-plan.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouteGuard } from './shared/route-guards/route.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -23,6 +21,8 @@ import { AttendanceComponent } from './attendance/attendance.component';
 import { TrainedEmployeeComponent } from './trained-employee/trained-employee.component';
 import { AddAttendanceComponent } from './attendance/add-attendance/add-attendance.component';
 import { AddTrainedEmployeeComponent } from './trained-employee/add-trained-employee/add-trained-employee.component';
+import { AddFeedbackComponent } from './plan/add-feedback/add-feedback.component';
+
 const childRoutes: Routes = [
 {path:'employee', component:EmployeeComponent},
 {path:'employee/add', component:AddEmployeeComponent},
@@ -44,7 +44,9 @@ const childRoutes: Routes = [
 {path:'trained-employee', component:TrainedEmployeeComponent},
 {path:'trained-employee/add', component:AddTrainedEmployeeComponent},
 {path:'trained-employee/edit/:id', component:AddTrainedEmployeeComponent},
-{path:'trained-employee/add-feedback-rating/:id', component:AddTrainedEmployeeComponent}
+// {path:'trained-employee/add-feedback-rating/:id', component:AddTrainedEmployeeComponent},
+
+{path:'add-feedback-rating/:id', component:AddFeedbackComponent},
 ];
 
 const routes: Routes = [
@@ -70,7 +72,8 @@ const routes: Routes = [
     AttendanceComponent,
     TrainedEmployeeComponent,
     AddAttendanceComponent,
-    AddTrainedEmployeeComponent
+    AddTrainedEmployeeComponent,
+    AddFeedbackComponent
   ],
   imports: [
     BrowserModule,

@@ -21,14 +21,14 @@ export class LoginComponent implements OnInit {
   this.myHttp.postData('http://localhost:3000/user/login',{email:this.email,password:this.password})
   .subscribe(
     data => {
-      // console.log("a ==>",a._id);
       localStorage.setItem('_user_token', data.data);
+      localStorage.setItem('_user_email', data.email);
       this.router.navigate(['/']);
     },
     error => {
       console.log("err",error);
       this.router.navigate(['/login']);
     }
-);
+  );
  }
 }
