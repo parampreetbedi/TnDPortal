@@ -58,6 +58,7 @@ export class EnrolmentComponent implements OnInit {
         this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
           data2 => {
             this.dashboard = data2;
+            this.router.navigate(['/plan/edit/'+id]);
           }
         );  
       }

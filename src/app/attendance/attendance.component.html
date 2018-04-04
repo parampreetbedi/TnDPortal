@@ -12,13 +12,13 @@
   <tbody>
     <tr *ngFor="let plan of plans; let i = index">
       <td>{{i+1}}</td>
-      <td>{{plan.tech}}</td>
-      <td>{{plan.trainer}}</td>
-      <td>{{plan.startDate}}</td>
-      <td>{{plan.endDate}}</td>
+      <td>{{plan.tech.name}}</td>
+      <td>{{plan.trainer.name}}</td>
+      <td>{{plan.startDate | date}}</td>
+      <td>{{plan.endDate | date}}</td>
       <td>
         <a routerLink="add/{{plan._id}}">Add Attendance</a>
-        <a routerLink="edit/{{plan._id}}">Edit Attendance</a>
+        <!-- <a routerLink="edit/{{plan._id}}">Edit Attendance</a> -->
         <a routerLink="view/{{plan._id}}">View Attendance</a>
       </td>
     </tr>

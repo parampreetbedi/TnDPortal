@@ -52,8 +52,6 @@ export class AddTrainedEmployeeComponent implements OnInit {
     })
     if(this.route.snapshot.params['id']){ 
       this.myHttp.getDataObservable('http://localhost:3000/trained-employee/'+this.route.snapshot.params['id']).subscribe((data:any) => {
-        //console.log(data);
-        //console.log(this.route);
         this.trainedEmployee.trainee = data.trainee._id;
         this.trainedEmployee.plan = data.plan._id;
         this.trainedEmployee.trainingCompleted = data.trainingCompleted;

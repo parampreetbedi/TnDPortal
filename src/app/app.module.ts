@@ -38,7 +38,7 @@ const childRoutes: Routes = [
 {path:'plan/edit/:id', component:AddPlanComponent},
 
 {path:'attendance', component:AttendanceComponent},
-{path:'attendance/add', component:AddAttendanceComponent},
+{path:'attendance/add/:id', component:AddAttendanceComponent},
 {path:'attendance/edit/:id', component:AddAttendanceComponent},
 
 {path:'trained-employee', component:TrainedEmployeeComponent},
