@@ -20,7 +20,4 @@ export class AttendanceComponent implements OnInit {
       }
     );
   }
-
-  
-
 }

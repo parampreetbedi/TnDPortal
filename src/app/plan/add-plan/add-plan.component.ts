@@ -76,7 +76,7 @@ export class AddPlanComponent implements OnInit {
 								this.router.navigate(['/plan']);
 							}
 						})
-					}						
+					}
 					else{
 						if(this.updatePlanStatus){
 							this.updatePlanStatusFunction(this)
@@ -89,7 +89,7 @@ export class AddPlanComponent implements OnInit {
 						}
 					}
 				}
-			)			
+			)
 		}else{
 			this.myHttp.postData('http://localhost:3000/plan',this.plan)
 			.subscribe(

@@ -22,6 +22,7 @@ import { TrainedEmployeeComponent } from './trained-employee/trained-employee.co
 import { AddAttendanceComponent } from './attendance/add-attendance/add-attendance.component';
 import { AddTrainedEmployeeComponent } from './trained-employee/add-trained-employee/add-trained-employee.component';
 import { AddFeedbackComponent } from './plan/add-feedback/add-feedback.component';
+import { ViewAttendanceComponent } from './attendance/view-attendance/view-attendance.component';
 
 const childRoutes: Routes = [
 {path:'employee', component:EmployeeComponent},
@@ -39,7 +40,8 @@ const childRoutes: Routes = [
 
 {path:'attendance', component:AttendanceComponent},
 {path:'attendance/add/:id', component:AddAttendanceComponent},
-{path:'attendance/edit/:id', component:AddAttendanceComponent},
+{path:'attendance/view/:id/edit/:id2', component:AddAttendanceComponent},
+{path:'attendance/view/:id', component:ViewAttendanceComponent},
 
 {path:'trained-employee', component:TrainedEmployeeComponent},
 {path:'trained-employee/add', component:AddTrainedEmployeeComponent},
@@ -73,7 +75,8 @@ const routes: Routes = [
     TrainedEmployeeComponent,
     AddAttendanceComponent,
     AddTrainedEmployeeComponent,
-    AddFeedbackComponent
+    AddFeedbackComponent,
+    ViewAttendanceComponent
   ],
   imports: [
     BrowserModule,
