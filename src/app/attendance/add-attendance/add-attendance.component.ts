@@ -12,25 +12,26 @@ import { Location } from '@angular/common';
 })
 export class AddAttendanceComponent implements OnInit {
   attendance: any = {
-    plan: '',
     classDate: new Date(),
     classConducted: 0,
     traineesPresent: []
   };
   users :any;
   trainees :any;
+  private sub: any;
+  private page: any;
 
   constructor(private myHttp:MyHttpService, public router:Router, private route:ActivatedRoute, private location: Location) { }
 
   save() {
     if(this.attendance.classConducted == 1){
       this.attendance.traineesPresent = [];
-    }
-    this.attendance.classDate=this.attendance.classDate.year+'-'+this.attendance.classDate.month+'-'+this.attendance.classDate.day;
+    }    
     if (this.route.snapshot.routeConfig.path == 'attendance/view/:id/edit/:id2') {
-      this.myHttp.putData('http://localhost:3000/attendance/'+this.route.snapshot.params['id'],this.attendance).subscribe(
+      this.attendance.classDate=this.attendance.classDate.year+'-'+this.attendance.classDate.month+'-'+this.attendance.classDate.day;
+      this.myHttp.putData('http://localhost:3000/attendance/'+this.route.snapshot.params['id2'],this.attendance).subscribe(
         data => {
-          this.location.back();
+          this.location.back();       //navigate back to last route
         }
       );
     } else if(this.route.snapshot.routeConfig.path == 'attendance/add/:id'){
@@ -58,7 +59,6 @@ export class AddAttendanceComponent implements OnInit {
             if(this.route.snapshot.routeConfig.path == 'attendance/view/:id/edit/:id2'){
               this.myHttp.getDataObservable('http://localhost:3000/attendance/'+this.route.snapshot.params['id2']).subscribe(
                 (data:any) => {
-                  console.log(data);
                   this.attendance.plan = data.plan;
                   this.attendance.classDate = new Date(data.date);
                   this.attendance.classDate = {
@@ -72,9 +72,16 @@ export class AddAttendanceComponent implements OnInit {
                   }else{
                     this.attendance.traineesPresent = data.traineesPresent;
                   }
-                  console.log(this.attendance)
                 }
               );
+            }
+            else{              
+              this.attendance.classDate = new Date();
+              this.attendance.classDate = {
+                year:	this.attendance.classDate.getFullYear(),
+                month:this.attendance.classDate.getMonth()+1,
+                day:	this.attendance.classDate.getDate()                 
+              }
             }
           })
       }
@@ -89,9 +96,5 @@ export class AddAttendanceComponent implements OnInit {
         })
     })
     return promise;
-  }
-
-  getPresentEmployees(){
-
   }
 }

@@ -53,15 +53,15 @@ export class EnrolmentComponent implements OnInit {
   }
 
   enroll(id) {
-    this.myHttp.patchData('http://localhost:3000/plan?id='+id+'&action=enroll',this.dashboard).subscribe(
-      data1 => {
+    // this.myHttp.patchData('http://localhost:3000/plan?id='+id+'&action=enroll',this.dashboard).subscribe(
+    //   data1 => {
         this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
           data2 => {
             this.dashboard = data2;
-            this.router.navigate(['/plan/edit/'+id]);
+            //this.router.navigate(['/plan/edit/'+id]);
           }
         );  
-      }
-    );
+      // }
+    //);
   }
 }

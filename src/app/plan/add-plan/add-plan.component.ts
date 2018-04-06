@@ -36,6 +36,8 @@ export class AddPlanComponent implements OnInit {
   model: NgbDateStruct;
   updatePlanStatus = false;
   planStatus:any;
+  private sub: any;
+  private page:any;
   constructor(private myHttp:MyHttpService, public router:Router, private route:ActivatedRoute) { }
   
 	checkPlanStatus(event:any){		
@@ -186,6 +188,13 @@ export class AddPlanComponent implements OnInit {
 					this.plan.isCompleted = data.isCompleted;
 					this.plan.type = data.type;
 					this.initTrainees();
+					this.sub = this.route.queryParams
+					.subscribe(params => {				//passing and handling query parameters
+						this.page = params['page'];
+						if(this.page=='dashboard'){
+							this.plan.type = 1
+						}
+					});
 				}
 			);
 		}
@@ -198,5 +207,11 @@ export class AddPlanComponent implements OnInit {
 				this.tempTrainees = this.plan.trainees;
 			}
 		);
+	}
+
+	ngOnDestroy() {
+		if(this.sub){
+			this.sub.unsubscribe();
+		}
 	}
 }

@@ -8,6 +8,7 @@
       <th>Type</th>
       <!-- <th>Trainees</th> -->
       <th>Starting From</th>
+      <th>Ending On</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
       <td>{{pl.type==0?'Need':'Plan'}}</td>
       <!-- <td>{{pl.trainee.length}}</td> -->
       <td>{{pl.startDate | date}}</td>
+      <td>{{(pl.endDate && pl.endDate!=0)?(pl.endDate | date):''}}</td>
       <td>
         <a style="cursor:pointer" routerLink="edit/{{pl._id}}">Edit</a>
         <a style="cursor:pointer" (click)="delete(pl._id,i)" routerLink="/plan">Delete</a>

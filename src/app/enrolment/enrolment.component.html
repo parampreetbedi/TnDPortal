@@ -19,7 +19,7 @@
         <td>{{pl.trainer.name}}</td>
         <td>{{pl.startDate | date}}</td>
         <td>
-          <a style="cursor:pointer" (click)="enroll(pl._id)" routerLink="/">Convert to Plan</a>
+          <a style="cursor:pointer" (click)="enroll(pl._id)" [routerLink]="['/plan/edit/', pl._id]" [queryParams]="{page:'dashboard'}">Convert to Plan</a>
           <a style="cursor:pointer" (click)="delete(pl._id,i)" routerLink="/">Delete</a>
           <!-- routerLink="/plan/edit/{{pl._id}} -->
         </td>
@@ -62,6 +62,7 @@
         <th>Trainer</th>
         <!-- <th>No. of Trainees</th> -->
         <th>Started on</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -71,6 +72,9 @@
         <td>{{pl.trainer.name}}</td>
         <!-- <td>{{pl.trainee.length}}</td> -->
         <td>{{pl.startDate | date}}</td>
+        <td>
+          <a style="cursor:pointer" (click)="enroll(pl._id)" routerLink="/attendance/add/{{pl._id}}">Mark Attendance</a>
+        </td>
       </tr>
     </tbody>
     </table>
