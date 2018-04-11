@@ -15,7 +15,7 @@ export class PlanComponent implements OnInit {
   delete(id){
   	this.myHttp.deleteData('http://localhost:3000/plan/'+id).subscribe(
   		data1 => {
-  			this.myHttp.getDataObservable('http://localhost:3000/plan/all').subscribe(
+  			this.myHttp.getData('http://localhost:3000/plan/all').subscribe(
 		        data => {
 		          this.plan = data;
 		        }
@@ -24,7 +24,7 @@ export class PlanComponent implements OnInit {
   	)
   }
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/plan/all').subscribe(
+    this.myHttp.getData('http://localhost:3000/plan/all').subscribe(
         data => {
           this.plan = data;
         }

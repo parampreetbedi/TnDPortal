@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 export class MyHttpService {
 constructor(private http:HttpClient) {}
 
-	getDataObservable(url) {
+	getData(url) {
 	  return this.http.get(url);
 	}
 	postData(url,data) {

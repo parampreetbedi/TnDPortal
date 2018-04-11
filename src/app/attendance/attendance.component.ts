@@ -14,7 +14,7 @@ export class AttendanceComponent implements OnInit {
   constructor(private myHttp: MyHttpService, public router:Router) { }
 
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/plan/ongoing').subscribe(
+    this.myHttp.getData('http://localhost:3000/plan/ongoing').subscribe(
       data => {
         this.plans = data;
       }

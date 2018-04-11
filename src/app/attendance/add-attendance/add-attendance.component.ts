@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyHttpService } from '../../shared/services/http.service';
 import { Router, ActivatedRoute } from '@angular/router'
-import { getHostElement } from '@angular/core/src/render3';
+//import { getHostElement } from '@angular/core/src/render3';
 import { Location } from '@angular/common';
 
 @Component({
@@ -46,7 +46,7 @@ export class AddAttendanceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/trained-employee/?plan='+this.route.snapshot.params['id']).subscribe(
+    this.myHttp.getData('http://localhost:3000/trained-employee/?plan='+this.route.snapshot.params['id']).subscribe(
 			data => {
         this.trainees = data;
         Promise
@@ -57,7 +57,7 @@ export class AddAttendanceComponent implements OnInit {
           .then((results:any) => {
             this.users = results;
             if(this.route.snapshot.routeConfig.path == 'attendance/view/:id/edit/:id2'){
-              this.myHttp.getDataObservable('http://localhost:3000/attendance/'+this.route.snapshot.params['id2']).subscribe(
+              this.myHttp.getData('http://localhost:3000/attendance/'+this.route.snapshot.params['id2']).subscribe(
                 (data:any) => {
                   this.attendance.plan = data.plan;
                   this.attendance.classDate = new Date(data.date);
@@ -90,7 +90,7 @@ export class AddAttendanceComponent implements OnInit {
   
   getEmployees(thisObj,tId){
     var promise = new Promise((resolve, reject) => {
-      thisObj.myHttp.getDataObservable('http://localhost:3000/employee/'+tId).subscribe(
+      thisObj.myHttp.getData('http://localhost:3000/employee/'+tId).subscribe(
         (data:any) => {
           resolve(data);
         })

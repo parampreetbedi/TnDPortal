@@ -38,7 +38,7 @@ export class AddTechnologyComponent implements OnInit {
   }
   ngOnInit() {
   	if(this.route.snapshot.params['id']){ 
-  		this.myHttp.getDataObservable('http://localhost:3000/technology/'+this.route.snapshot.params['id']).subscribe(
+  		this.myHttp.getData('http://localhost:3000/technology/'+this.route.snapshot.params['id']).subscribe(
 	        (data:any) => {
 	          this.tech = data;
 	        }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MyHttpService } from './../../shared/services/http.service';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { forEach } from '@angular/router/src/utils/collection';
+//import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+//import { forEach } from '@angular/router/src/utils/collection';
 import * as _ from 'underscore';
 
 @Component({
@@ -33,7 +33,7 @@ export class AddPlanComponent implements OnInit {
   newTech:Object;
   employee:any;
   technology:any;
-  model: NgbDateStruct;
+  //model: NgbDateStruct;
   updatePlanStatus = false;
   planStatus:any;
   private sub: any;
@@ -153,10 +153,10 @@ export class AddPlanComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.myHttp.getDataObservable('http://localhost:3000/employee/all').subscribe(
+		this.myHttp.getData('http://localhost:3000/employee/all').subscribe(
 			(user:any) => {
 			this.employee = user;
-			this.myHttp.getDataObservable('http://localhost:3000/technology/all').subscribe(
+			this.myHttp.getData('http://localhost:3000/technology/all').subscribe(
 				(tech:any) => {
 				this.technology = tech;
 				}
@@ -164,7 +164,7 @@ export class AddPlanComponent implements OnInit {
 			}
 		);
 		if(this.route.snapshot.params['id']){
-			this.myHttp.getDataObservable('http://localhost:3000/plan/'+this.route.snapshot.params['id']).subscribe(
+			this.myHttp.getData('http://localhost:3000/plan/'+this.route.snapshot.params['id']).subscribe(
 				(data:any) => {
 					this.plan.tech = data.tech._id;
 					this.plan.startDate = new Date(data.startDate);
@@ -201,7 +201,7 @@ export class AddPlanComponent implements OnInit {
 	}
 	
 	initTrainees(){
-		this.myHttp.getDataObservable('http://localhost:3000/trained-employee/?plan='+this.route.snapshot.params['id']).subscribe(
+		this.myHttp.getData('http://localhost:3000/trained-employee/?plan='+this.route.snapshot.params['id']).subscribe(
 			data => {
 				this.plan.trainees = data;
 				this.tempTrainees = this.plan.trainees;

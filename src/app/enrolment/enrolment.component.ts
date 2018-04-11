@@ -17,16 +17,16 @@ export class EnrolmentComponent implements OnInit {
   constructor(private myHttp: MyHttpService, public router:Router) { }
 
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
+    this.myHttp.getData('http://localhost:3000/plan/need').subscribe(
       data => {
         this.dashboard = data;
-        this.myHttp.getDataObservable('http://localhost:3000/plan/completed').subscribe(
+        this.myHttp.getData('http://localhost:3000/plan/completed').subscribe(
           completed => {
             this.completed = completed;
-            this.myHttp.getDataObservable('http://localhost:3000/plan/ongoing').subscribe(
+            this.myHttp.getData('http://localhost:3000/plan/ongoing').subscribe(
               ongoing => {
                 this.ongoing = ongoing;
-                this.myHttp.getDataObservable('http://localhost:3000/plan/upcoming').subscribe(
+                this.myHttp.getData('http://localhost:3000/plan/upcoming').subscribe(
                   upcoming => {
                     this.upcoming = upcoming;
                   }
@@ -42,7 +42,7 @@ export class EnrolmentComponent implements OnInit {
   delete(id){
   	this.myHttp.deleteData('http://localhost:3000/plan/'+id).subscribe(
       data => {
-        this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
+        this.myHttp.getData('http://localhost:3000/plan/need').subscribe(
           data1 => {
             this.dashboard = data1;
             this.router.navigate(['/']);
@@ -55,7 +55,7 @@ export class EnrolmentComponent implements OnInit {
   enroll(id) {
     // this.myHttp.patchData('http://localhost:3000/plan?id='+id+'&action=enroll',this.dashboard).subscribe(
     //   data1 => {
-        this.myHttp.getDataObservable('http://localhost:3000/plan/need').subscribe(
+        this.myHttp.getData('http://localhost:3000/plan/need').subscribe(
           data2 => {
             this.dashboard = data2;
             //this.router.navigate(['/plan/edit/'+id]);

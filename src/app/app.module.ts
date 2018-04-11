@@ -2,18 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes }  from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { RouteGuard } from './shared/route-guards/route.guard';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { TechnologyComponent } from './technology/technology.component';
 import { PlanComponent } from './plan/plan.component';
 import { HeaderComponent } from './header/header.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AddTechnologyComponent } from './technology/add-technology/add-technology.component';
 import { AddEmployeeComponent } from './employee/add-employee/add-employee.component';
 import { AddPlanComponent } from './plan/add-plan/add-plan.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RouteGuard } from './shared/route-guards/route.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EnrolmentComponent } from './enrolment/enrolment.component';

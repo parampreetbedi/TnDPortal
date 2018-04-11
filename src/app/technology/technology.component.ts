@@ -14,7 +14,7 @@ export class TechnologyComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/technology/all').subscribe(
+    this.myHttp.getData('http://localhost:3000/technology/all').subscribe(
         data => {
           this.technology = data;
         }
@@ -24,7 +24,7 @@ export class TechnologyComponent implements OnInit {
   delete(id){
   	this.myHttp.deleteData('http://localhost:3000/technology/'+id).subscribe(
         data => {
-        	this.myHttp.getDataObservable('http://localhost:3000/technology/all').subscribe(
+        	this.myHttp.getData('http://localhost:3000/technology/all').subscribe(
 		        data1 => {
 		          this.technology = data1;
 		        }

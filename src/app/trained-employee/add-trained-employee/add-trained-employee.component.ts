@@ -41,17 +41,17 @@ export class AddTrainedEmployeeComponent implements OnInit {
     }    
   }
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/employee/all').subscribe(
+    this.myHttp.getData('http://localhost:3000/employee/all').subscribe(
      (employees:any) => {
       this.employees = employees;
-      this.myHttp.getDataObservable('http://localhost:3000/plan/all').subscribe(
+      this.myHttp.getData('http://localhost:3000/plan/all').subscribe(
         (plans:any) => {
           this.plans = plans;
         }
       )
     })
     if(this.route.snapshot.params['id']){ 
-      this.myHttp.getDataObservable('http://localhost:3000/trained-employee/'+this.route.snapshot.params['id']).subscribe((data:any) => {
+      this.myHttp.getData('http://localhost:3000/trained-employee/'+this.route.snapshot.params['id']).subscribe((data:any) => {
         this.trainedEmployee.trainee = data.trainee._id;
         this.trainedEmployee.plan = data.plan._id;
         this.trainedEmployee.trainingCompleted = data.trainingCompleted;

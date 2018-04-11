@@ -16,7 +16,7 @@ export class TrainedEmployeeComponent implements OnInit {
   delete(id){
   	this.myHttp.deleteData('http://localhost:3000/trained-employee/'+id).subscribe(
   		data1 => {
-  			this.myHttp.getDataObservable('http://localhost:3000/trained-employee/all').subscribe(
+  			this.myHttp.getData('http://localhost:3000/trained-employee/all').subscribe(
 		        data => {
 		          this.trainedEmployees = data;
 		        }
@@ -26,7 +26,7 @@ export class TrainedEmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/trained-employee/all').subscribe(
+    this.myHttp.getData('http://localhost:3000/trained-employee/all').subscribe(
       data => {
         this.trainedEmployees = data;
         //console.log(data);

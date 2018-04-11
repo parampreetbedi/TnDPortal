@@ -36,7 +36,7 @@ export class AddEmployeeComponent implements OnInit {
   }
   ngOnInit() {
   	if(this.route.snapshot.params['id']){ 
-  		this.myHttp.getDataObservable('http://localhost:3000/employee/'+this.route.snapshot.params['id']).subscribe(
+  		this.myHttp.getData('http://localhost:3000/employee/'+this.route.snapshot.params['id']).subscribe(
 	        (data:any) => {
 	          this.tech = data;
 	        }

@@ -15,17 +15,17 @@ export class EmployeeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myHttp.getDataObservable('http://localhost:3000/employee/all').subscribe(
+    this.myHttp.getData('http://localhost:3000/employee/all').subscribe(
         data => {
           this.employee = data;
         }
     );
   }
 
-    delete(id){
+  delete(id){
     this.myHttp.deleteData('http://localhost:3000/employee/'+id).subscribe(
         data => {
-          this.myHttp.getDataObservable('http://localhost:3000/employee/all').subscribe(
+          this.myHttp.getData('http://localhost:3000/employee/all').subscribe(
             data1 => {
               this.employee = data1;
             }
