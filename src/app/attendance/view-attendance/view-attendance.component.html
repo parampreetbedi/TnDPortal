@@ -1,0 +1,26 @@
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Class Date</th>
+      <th>Class Conducted</th>
+      <th>Trainees Present</th>
+      <th>Trainees</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let att of attendances; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{att.date | date}}</td>
+      <td>{{att.classConducted == 0?'Yes':'No'}}</td>
+      <td>{{att.traineesPresent.length}}</td>
+      <td>
+        <span *ngFor="let tp of att.traineesPresent">{{tp.name}}, </span>
+      </td>
+      <td>
+        <a routerLink="edit/{{att._id}}">Edit Attendance</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
