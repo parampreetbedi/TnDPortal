@@ -1,3 +1,42 @@
-<p>
-  view-employee-attendance works!
-</p>
+<form class="form-horizontal">
+  <fieldset style="width:500px">
+    <!-- <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Date</label>
+      <div class="col-lg-10 col-lg-offset-2">
+        <ngb-datepicker #dp [(ngModel)]="employeeAttendance.classDate" name="classDate" (navigate)="date = $event.next"></ngb-datepicker>
+      </div>
+    </div> -->    
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Plan</label>
+      <div class="col-lg-10">
+        <select [(ngModel)]="employeeAttendance.plan" name="plan" (change)="loadTraineesAndPlanAttendance($event)">
+          <option *ngFor="let plan of plans" value="{{plan._id}}">{{plan.tech.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Trainee</label>
+      <div class="col-lg-10">
+        <select [(ngModel)]="employeeAttendance.trainee" name="trainee" (change)="loadTraineeAttendance($event)">
+          <option *ngFor="let trainee of trainees" value="{{trainee.trainee._id}}">{{trainee.trainee.name}}</option>
+        </select>
+      </div>
+    </div>
+  </fieldset>
+</form>
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Class Date</th>
+      <th>Attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let att of attendances; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{att.date | date}}</td>
+      <td><span [style.color]="att.classAttended=='Present'?'Green':'Red'">{{att.classAttended}}</span></td>
+    </tr>
+  </tbody>
+</table>
