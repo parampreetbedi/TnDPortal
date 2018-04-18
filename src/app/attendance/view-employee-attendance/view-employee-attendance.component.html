@@ -8,20 +8,19 @@
     </div> -->    
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label" >Plan</label>
-      <div class="col-lg-10">
+      <div class="col-lg-4">
         <select [(ngModel)]="employeeAttendance.plan" name="plan" (change)="loadTraineesAndPlanAttendance($event)">
-          <option *ngFor="let plan of plans" value="{{plan._id}}">{{plan.tech.name}}</option>
+          <option *ngFor="let plan of plans" value="{{plan._id}}">{{plan.tech.name}} {{ plan.startDate | date:'dd-MM-yyyy'}}</option>
         </select>
       </div>
-    </div>
-    <div class="form-group">
-      <label for="inputEmail" class="col-lg-2 control-label" >Trainee</label>
-      <div class="col-lg-10">
-        <select [(ngModel)]="employeeAttendance.trainee" name="trainee" (change)="loadTraineeAttendance($event)">
+      <label for="inputEmail" class="col-lg-2 control-label" *ngIf="trainees.length" >Trainee</label>
+      <div class="col-lg-4">
+        <select [(ngModel)]="employeeAttendance.trainee" name="trainee" *ngIf="trainees.length" (change)="loadTraineeAttendance($event)" [disabled]="disableTrainees">
           <option *ngFor="let trainee of trainees" value="{{trainee.trainee._id}}">{{trainee.trainee.name}}</option>
         </select>
       </div>
     </div>
+    
   </fieldset>
 </form>
 <table class="table table-striped table-hover ">

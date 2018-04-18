@@ -20,7 +20,7 @@ export class ViewEmployeeAttendanceComponent implements OnInit {
   planAttendances = [];
   traineeAttendances = [];
   attendances = [];
-  //disableTrainees = true;
+  disableTrainees = true;
 
   constructor(private myHttp:MyHttpService, public router:Router, private route:ActivatedRoute) { }
 
@@ -37,11 +37,13 @@ export class ViewEmployeeAttendanceComponent implements OnInit {
   }
 
   loadTraineesAndPlanAttendance(event){
-    //this.disableTrainees = false;
+    this.disableTrainees = true;
     this.trainees = [];
     this.attendances = [];
+    this.employeeAttendance.trainee = "";
     this.myHttp.getData('http://localhost:3000/trained-employee?plan='+event.target.value+'&data=all').subscribe((data:any) => {
       this.trainees = data;
+      this.disableTrainees = false;
       this.myHttp.getData('http://localhost:3000/attendance?plan='+this.employeeAttendance.plan+'&classConducted=0').subscribe((data1:any) => {
         console.log(data1);
         this.planAttendances = data1;

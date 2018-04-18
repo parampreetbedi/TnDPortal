@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MyHttpService } from '../../shared/services/http.service';
 import { Router, ActivatedRoute } from '@angular/router'
-//import { getHostElement } from '@angular/core/src/render3';
 import { Location } from '@angular/common';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-add-attendance',
@@ -14,7 +14,8 @@ export class AddAttendanceComponent implements OnInit {
   attendance: any = {
     classDate: new Date(),
     classConducted: 0,
-    traineesPresent: []
+    traineesPresent: [],
+    traineesAbsent: []
   };
   users :any;
   trainees :any;
@@ -26,6 +27,10 @@ export class AddAttendanceComponent implements OnInit {
   save() {
     if(this.attendance.classConducted == 1){
       this.attendance.traineesPresent = [];
+      this.attendance.traineesAbsent = [];
+    }
+    else{
+      this.attendance.traineesAbsent = _.difference(this.trainees, this.attendance.traineesPresent);
     }    
     if (this.route.snapshot.routeConfig.path == 'attendance/view/:id/edit/:id2') {
       this.attendance.classDate=this.attendance.classDate.year+'-'+this.attendance.classDate.month+'-'+this.attendance.classDate.day;
