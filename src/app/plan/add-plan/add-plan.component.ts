@@ -45,12 +45,11 @@ export class AddPlanComponent implements OnInit {
 	}
 
   	save(){
-
 		this.plan.startDate=this.plan.startDate.year+'-'+this.plan.startDate.month+'-'+this.plan.startDate.day;
 		if(this.plan.endDate != 0){
 			this.plan.endDate=this.plan.endDate.year+'-'+this.plan.endDate.month+'-'+this.plan.endDate.day;
 		}
-  		if(this.route.snapshot.params['id']){ 
+  		if(this.route.snapshot.params['id']){
 	  		this.myHttp.putData('http://localhost:3000/plan/'+this.route.snapshot.params['id'],this.plan).subscribe(
 				data => {				
 					if(!(_.isEqual(this.plan.trainees, this.tempTrainees))){
@@ -182,6 +181,9 @@ export class AddPlanComponent implements OnInit {
 							month:this.plan.endDate.getMonth()+1,
 							day:	this.plan.endDate.getDate()
 						}
+					}
+					if(data.generatedDate){
+						this.plan.generatedDate = data.generatedDate;
 					}
 					this.plan.trainer = data.trainer._id;
 					this.plan.isCompleted = data.isCompleted;

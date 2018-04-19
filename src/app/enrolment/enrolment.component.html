@@ -1,105 +1,102 @@
 <!-- <button style="float:right; margin: 10px 0" routerLink='/plan/add' class="btn btn-primary">Add Plan</button> -->
 <div class="main-content">
   <div class="col-lg-6 col-md-6" *ngIf="dashboard">
-  <h2>Training Needed</h2>
+    <h2>Training Needed</h2>
     <table class="table table-striped table-hover " border="1|0">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Technology</th>
-        <th>Trainer</th>
-        <th>Starting From</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pl of dashboard; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{pl.tech.name}}</td>
-        <td>{{pl.trainer.name}}</td>
-        <td>{{pl.startDate | date}}</td>
-        <td>
-          <a style="cursor:pointer" (click)="enroll(pl._id)" [routerLink]="['/plan/edit/', pl._id]" [queryParams]="{page:'dashboard'}">Convert to Plan</a>
-          <a style="cursor:pointer" (click)="delete(pl._id,i)" routerLink="/">Delete</a>
-          <!-- routerLink="/plan/edit/{{pl._id}} -->
-        </td>
-      </tr>
-    </tbody>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Technology</th>
+          <th>Trainer</th>
+          <th>Starting From</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pl of dashboard; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{pl.tech.name}}</td>
+          <td>{{pl.trainer.name}}</td>
+          <td>{{pl.startDate | date}}</td>
+          <td>
+            <a style="cursor:pointer" (click)="enroll(pl._id)" [routerLink]="['/plan/edit/', pl._id]" [queryParams]="{page:'dashboard'}">Convert to Plan</a>
+            <a style="cursor:pointer" (click)="delete(pl._id,i)" routerLink="/">Delete</a>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
-    <div class="col-lg-6 col-md-6" *ngIf="completed">
-  <h2>Completed Trainings</h2>
+  <div class="col-lg-6 col-md-6" *ngIf="completed">
+    <h2>Completed Trainings</h2>
     <table class="table table-striped table-hover " border="1|0">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Technology</th>
-        <th>Trainer</th>
-        <!-- <th>No. of Trainees</th> -->
-        <th>Started on</th>
-        <th>Completed on</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pl of completed; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{pl.tech.name}}</td>
-        <td>{{pl.trainer.name}}</td>
-        <!-- <td>{{pl.trainee.length}}</td> -->
-        <td>{{pl.startDate | date}}</td>
-        <td>{{pl.endDate | date}}</td>
-      </tr>
-    </tbody>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Technology</th>
+          <th>Trainer</th>
+          <th>Started on</th>
+          <th>Completed on</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pl of completed; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{pl.tech.name}}</td>
+          <td>{{pl.trainer.name}}</td>
+          <td>{{pl.startDate | date}}</td>
+          <td>{{pl.endDate | date}}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
-    <div class="col-lg-6 col-md-6" *ngIf="ongoing">
-  <h2>Ongoing Trainings</h2>
+  <div class="col-lg-6 col-md-6" *ngIf="ongoing">
+    <h2>Ongoing Trainings</h2>
     <table class="table table-striped table-hover " border="1|0">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Technology</th>
-        <th>Trainer</th>
-        <!-- <th>No. of Trainees</th> -->
-        <th>Started on</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pl of ongoing; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{pl.tech.name}}</td>
-        <td>{{pl.trainer.name}}</td>
-        <!-- <td>{{pl.trainee.length}}</td> -->
-        <td>{{pl.startDate | date}}</td>
-        <td>
-          <a style="cursor:pointer" (click)="enroll(pl._id)" routerLink="/attendance/add/{{pl._id}}">Mark Attendance</a>
-        </td>
-      </tr>
-    </tbody>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Technology</th>
+          <th>Trainer</th>
+          <!-- <th>No. of Trainees</th> -->
+          <th>Started on</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pl of ongoing; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{pl.tech.name}}</td>
+          <td>{{pl.trainer.name}}</td>
+          <!-- <td>{{pl.trainee.length}}</td> -->
+          <td>{{pl.startDate | date}}</td>
+          <td>
+            <a style="cursor:pointer" (click)="enroll(pl._id)" routerLink="/attendance/add/{{pl._id}}">Mark Attendance</a>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <div class="col-lg-6 col-md-6" *ngIf="upcoming">
-  <h2>Upcoming Trainings</h2>
+    <h2>Upcoming Trainings</h2>
     <table class="table table-striped table-hover " border="1|0">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Technology</th>
-        <th>Trainer</th>
-        <!-- <th>No. of Trainees</th> -->
-        <th>Starting From</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let pl of upcoming; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{pl.tech.name}}</td>
-        <td>{{pl.trainer.name}}</td>
-        <!-- <td>{{pl.trainee.length}}</td> -->
-        <td>{{pl.startDate | date}}</td>
-      </tr>
-    </tbody>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Technology</th>
+          <th>Trainer</th>
+          <!-- <th>No. of Trainees</th> -->
+          <th>Starting From</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pl of upcoming; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{pl.tech.name}}</td>
+          <td>{{pl.trainer.name}}</td>
+          <!-- <td>{{pl.trainee.length}}</td> -->
+          <td>{{pl.startDate | date}}</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </div>
