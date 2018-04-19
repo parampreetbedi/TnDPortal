@@ -4,6 +4,7 @@
       <th>#</th>
       <th>Class Date</th>
       <th>Class Conducted</th>
+      <th>Trainees Absent</th>
       <th>Trainees Present</th>
       <th>Trainees</th>
       <th>Actions</th>
@@ -14,6 +15,7 @@
       <td>{{i+1}}</td>
       <td>{{att.date | date}}</td>
       <td>{{att.classConducted == 0?'Yes':'No'}}</td>
+      <td>{{att.traineesAbsent.length}}</td>
       <td>{{att.traineesPresent.length}}</td>
       <td>
         <span *ngFor="let tp of att.traineesPresent">{{tp.name}}, </span>

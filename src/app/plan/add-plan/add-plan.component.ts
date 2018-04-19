@@ -17,7 +17,7 @@ export class AddPlanComponent implements OnInit {
   plan:any = {
   	tech:"",
 	startDate:{year:0,month:0,day:0},
-	endDate:0,//{year:0,month:0,day:0},
+	endDate:0,
 	trainer:"",
 	isCompleted:2,
 	type:'',
@@ -33,7 +33,6 @@ export class AddPlanComponent implements OnInit {
   newTech:Object;
   employee:any;
   technology:any;
-  //model: NgbDateStruct;
   updatePlanStatus = false;
   planStatus:any;
   private sub: any;

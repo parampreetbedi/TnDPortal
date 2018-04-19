@@ -31,9 +31,9 @@ export class AddAttendanceComponent implements OnInit {
     }
     else{
       this.attendance.traineesAbsent = _.difference(this.trainees, this.attendance.traineesPresent);
-    }    
-    if (this.route.snapshot.routeConfig.path == 'attendance/view/:id/edit/:id2') {
-      this.attendance.classDate=this.attendance.classDate.year+'-'+this.attendance.classDate.month+'-'+this.attendance.classDate.day;
+    }
+    this.attendance.classDate=this.attendance.classDate.year+'-'+this.attendance.classDate.month+'-'+this.attendance.classDate.day;
+    if (this.route.snapshot.routeConfig.path == 'attendance/view/:id/edit/:id2') {      
       this.myHttp.putData('http://localhost:3000/attendance/'+this.route.snapshot.params['id2'],this.attendance).subscribe(
         data => {
           this.location.back();       //navigate back to last route
@@ -41,7 +41,6 @@ export class AddAttendanceComponent implements OnInit {
       );
     } else if(this.route.snapshot.routeConfig.path == 'attendance/add/:id'){
       this.attendance.plan = this.route.snapshot.params['id'];
-      this.attendance.classDate=this.attendance.classDate.year+'-'+this.attendance.classDate.month+'-'+this.attendance.classDate.day;
       this.myHttp.postData('http://localhost:3000/attendance', this.attendance).subscribe(
         data => {
           this.router.navigate(['/attendance']);
@@ -80,7 +79,7 @@ export class AddAttendanceComponent implements OnInit {
                 }
               );
             }
-            else{              
+            else{
               this.attendance.classDate = new Date();
               this.attendance.classDate = {
                 year:	this.attendance.classDate.getFullYear(),
@@ -90,7 +89,7 @@ export class AddAttendanceComponent implements OnInit {
             }
           })
       }
-    )    
+    )
   }
   
   getEmployees(thisObj,tId){
