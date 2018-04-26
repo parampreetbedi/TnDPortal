@@ -4,6 +4,7 @@ import { RouterModule, Routes }  from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 
 import { RouteGuard } from './shared/route-guards/route.guard';
 
@@ -89,7 +90,8 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    AngularMultiSelectModule
   ],
   providers: [
     HttpClient,
