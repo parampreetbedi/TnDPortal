@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MyHttpService } from './../../shared/services/http.service';
-//import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-//import { forEach } from '@angular/router/src/utils/collection';
 import * as _ from 'underscore';
 
 @Component({
@@ -12,8 +10,15 @@ import * as _ from 'underscore';
   providers :[MyHttpService]
 })
 export class AddPlanComponent implements OnInit {
+  itemListTrainee: any = [];
+  selectedItemsTrainee:any;
+  settingsTrainee = {};
 
-  tempTrainees = [];
+  itemListTrainer: any = [];
+  selectedItemsTrainer:any;
+  settingsTrainer = {};
+
+  tempTrainees=[];
   plan:any = {
   	tech:"",
 	startDate:{year:0,month:0,day:0},
@@ -31,11 +36,9 @@ export class AddPlanComponent implements OnInit {
     feedback:null
   }
   newTech:Object;
-  employee:any;
   technology:any;
   updatePlanStatus = false;
   planStatus:any;
-  private sub: any;
   private page:any;
   constructor(private myHttp:MyHttpService, public router:Router, private route:ActivatedRoute) { }
   
@@ -50,8 +53,9 @@ export class AddPlanComponent implements OnInit {
 			this.plan.endDate=this.plan.endDate.year+'-'+this.plan.endDate.month+'-'+this.plan.endDate.day;
 		}
   		if(this.route.snapshot.params['id']){
+			
 	  		this.myHttp.putData('http://localhost:3000/plan/'+this.route.snapshot.params['id'],this.plan).subscribe(
-				data => {				
+				data => {
 					if(!(_.isEqual(this.plan.trainees, this.tempTrainees))){
 						Promise.all(									//delete previous trainees
 							this.tempTrainees.map(
@@ -151,14 +155,30 @@ export class AddPlanComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.myHttp.getData('http://localhost:3000/employee/all').subscribe(
-			(user:any) => {
-			this.employee = user;
-			this.myHttp.getData('http://localhost:3000/technology/all').subscribe(
-				(tech:any) => {
-				this.technology = tech;
-				}
-			);
+		this.settingsTrainee = {
+			text: "Select Employees",
+			enableCheckAll: false,
+            primaryKey: "_id",
+            labelKey: "fld_empFirstName",
+            noDataLabel: "Search Employees...",
+            enableSearchFilter: true,
+			searchBy: ['fld_empFirstName']
+		};
+
+		this.settingsTrainer = {
+			text: "Select Trainer",
+			enableCheckAll: false,
+            primaryKey: "_id",
+            labelKey: "fld_empFirstName",
+            noDataLabel: "Search Trainer...",
+            enableSearchFilter: true,
+			searchBy: ['fld_empFirstName'],
+			singleSelection: true
+		};
+		
+		this.myHttp.getData('http://localhost:3000/technology/all').subscribe(
+			(tech:any) => {
+			this.technology = tech;
 			}
 		);
 		if(this.route.snapshot.params['id']){
@@ -185,11 +205,15 @@ export class AddPlanComponent implements OnInit {
 					if(data.generatedDate){
 						this.plan.generatedDate = data.generatedDate;
 					}
-					this.plan.trainer = data.trainer._id;
+					this.plan.trainer = data.trainer;
+					this.initTraineeDetail(data.trainer, this)
+					.then(data1 => {
+						this.selectedItemsTrainer = [data1];
+					})
 					this.plan.isCompleted = data.isCompleted;
 					this.plan.type = data.type;
 					this.initTrainees();
-					this.sub = this.route.queryParams
+					this.route.queryParams
 					.subscribe(params => {				//passing and handling query parameters
 						this.page = params['page'];
 						if(this.page=='dashboard'){
@@ -203,16 +227,63 @@ export class AddPlanComponent implements OnInit {
 	
 	initTrainees(){
 		this.myHttp.getData('http://localhost:3000/trained-employee/?plan='+this.route.snapshot.params['id']).subscribe(
-			data => {
+			data => {				
 				this.plan.trainees = data;
-				this.tempTrainees = this.plan.trainees;
+				this.plan.trainees.forEach(elem => {
+					this.tempTrainees.push(elem);
+				})				
+				Promise.all(this.plan.trainees.map( 
+					traineeId => this.initTraineeDetail(traineeId,this)
+				)).then(data => {
+					this.selectedItemsTrainee = data;
+				})
 			}
 		);
 	}
 
-	ngOnDestroy() {
-		if(this.sub){
-			this.sub.unsubscribe();
+	initTraineeDetail(traineeId, thisObj){
+		var promise = new Promise((resolve, reject) => {			
+			thisObj.myHttp.getData('http://localhost:3009/employees/empDetailBriefId/'+traineeId)
+				.subscribe( data => {
+					resolve(data);
+				})
+		})
+		return promise;
+	}
+
+	onSearchTrainee(evt: any) {
+		this.itemListTrainee = [];
+		if (evt.target.value.length >= 3){
+			this.myHttp.getData('http://localhost:3009/employees/empDetailBrief/'+evt.target.value)
+				.subscribe(res => {
+					this.itemListTrainee = res;
+				})
 		}
+	}
+	
+    onItemSelectTrainee(item: any) {	
+		this.plan.trainees.push(item._id);
+	}
+	
+    OnItemDeSelectTrainee(item: any) {
+		this.plan.trainees = _.without(this.plan.trainees,item._id)
+	}
+
+	onSearchTrainer(evt: any) {
+		this.itemListTrainer = [];
+		if (evt.target.value.length >= 3){
+			this.myHttp.getData('http://localhost:3009/employees/empDetailBrief/'+evt.target.value)
+				.subscribe(res => {
+					this.itemListTrainer = res;
+				})
+		}
+	}
+	
+    onItemSelectTrainer(item: any) {
+		this.plan.trainer = item._id;
+	}
+	
+    OnItemDeSelectTrainer(item: any) {
+		this.plan.trainer = "";
 	}
 }

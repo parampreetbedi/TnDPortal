@@ -17,27 +17,58 @@
         </select>
       </div>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label" >Trainer</label>
       <div class="col-lg-10">
         <select [(ngModel)]="plan.trainer" name="trainer">
         	<option *ngFor="let emp of employee" value="{{emp._id}}">{{emp.name}}</option>
         </select>
       </div>
+    </div> -->
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Trainer</label>
+      <div class="col-lg-10">
+        <angular2-multiselect [data]="itemListTrainer" [(ngModel)]="selectedItemsTrainer" [settings]="settingsTrainer" (onSelect)="onItemSelectTrainer($event)"
+        (onDeSelect)="OnItemDeSelectTrainer($event)" name="multiselector1">
+          <c-search>
+            <ng-template>
+              <input type="text" (keyup)="onSearchTrainer($event)" placeholder="Type First Name to search" style="border: none;width: 100%; height: 100%;outline: none;"/>
+            </ng-template>
+          </c-search>
+          <c-item>
+            <ng-template let-item="item">
+              <label style="color: #333;width: 150px;">{{item.fld_empFirstName}} {{item.fld_empLastName}} ({{item.fld_empEmail}})</label>
+            </ng-template>
+          </c-item>
+        </angular2-multiselect>
+      </div>
     </div>
-    <div class="form-group" *ngIf="plan.type=='1'">
+    <!-- <div class="form-group" *ngIf="plan.type=='1'">
       <label for="inputEmail" class="col-lg-2 control-label" >Trainees</label>
       <div class="col-lg-10">
         <select [(ngModel)]="plan.trainees" name="trainees" multiple>
           <option *ngFor="let emp of employee" value="{{emp._id}}">{{emp.name}}</option>
         </select>
       </div>
-    </div>
-    <!-- <div class="form-group">
-      <div class="col-lg-10 col-lg-offset-2">
-        <button type="button" class="btn btn-default" (click)="addTrainee()">Add Trainee</button>
-      </div>
     </div> -->
+    <div class="form-group">
+      <label for="inputEmail" class="col-lg-2 control-label" >Trainees</label>
+      <div class="col-lg-10">
+        <angular2-multiselect [data]="itemListTrainee" [(ngModel)]="selectedItemsTrainee" [settings]="settingsTrainee" (onSelect)="onItemSelectTrainee($event)"
+        (onDeSelect)="OnItemDeSelectTrainee($event)" name="multiselector2">
+          <c-search>
+            <ng-template>
+              <input type="text" (keyup)="onSearchTrainee($event)" placeholder="Type First Name to search" style="border: none;width: 100%; height: 100%;outline: none;"/>
+            </ng-template>
+          </c-search>
+          <c-item>
+            <ng-template let-item="item">
+              <label style="color: #333;width: 150px;">{{item.fld_empFirstName}} {{item.fld_empLastName}} ({{item.fld_empEmail}})</label>
+            </ng-template>
+          </c-item>
+        </angular2-multiselect>
+      </div>
+    </div>
     <div class="form-group">
       <label for="inputEmail" class="col-lg-2 control-label" >Start Date</label>
       <div class="col-lg-10 col-lg-offset-2">

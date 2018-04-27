@@ -16,7 +16,7 @@
     <tr *ngFor="let pl of plan; let i = index">
       <td>{{i+1}}</td>
       <td>{{pl.tech.name}}</td>
-      <td>{{pl.trainer.name}}</td>
+      <td>{{pl.trainer}}</td>
       <td>{{pl.type==0?'Need':'Plan'}}</td>
       <!-- <td>{{pl.trainee.length}}</td> -->
       <td>{{pl.startDate | date}}</td>
