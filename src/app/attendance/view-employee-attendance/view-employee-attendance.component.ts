@@ -32,7 +32,6 @@ export class ViewEmployeeAttendanceComponent implements OnInit {
     this.employeeAttendance.trainee = "";
     this.myHttp.getData('http://localhost:3000/trained-employee?plan='+event.target.value+'&data=all').subscribe((data:any) => {
       this.trainees = data;
-      console.log(data)
       Promise.all(									//delete previous trainees
         this.trainees.map(
           trainee => this.populateTrainee(trainee,this)
@@ -45,7 +44,6 @@ export class ViewEmployeeAttendanceComponent implements OnInit {
 
   loadTraineeAttendance(event){    
     this.myHttp.getData('http://localhost:3000/attendance?plan='+this.employeeAttendance.plan+'&trainee='+event.target.value).subscribe((data:any) => {
-      console.log(data);
       this.attendances = data;
     })
   }

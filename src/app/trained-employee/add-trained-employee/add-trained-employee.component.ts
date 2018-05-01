@@ -24,7 +24,6 @@ export class AddTrainedEmployeeComponent implements OnInit {
 
   save(){
     if(this.route.snapshot.params['id']){
-      //console.log(this.trainedEmployee);
       this.myHttp.putData('http://localhost:3000/trained-employee/'+this.route.snapshot.params['id'], this.trainedEmployee).subscribe(
   		  (data:any) => {          
           this.router.navigate(['/trained-employee']);
@@ -32,7 +31,6 @@ export class AddTrainedEmployeeComponent implements OnInit {
       )
     }
     else{
-      //console.log(this.trainedEmployee);
       this.myHttp.postData('http://localhost:3000/trained-employee',this.trainedEmployee).subscribe(
   		  (data:any) => {
           this.router.navigate(['/trained-employee']);

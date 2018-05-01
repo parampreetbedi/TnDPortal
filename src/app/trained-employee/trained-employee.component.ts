@@ -29,7 +29,6 @@ export class TrainedEmployeeComponent implements OnInit {
     this.myHttp.getData('http://localhost:3000/trained-employee/all').subscribe(
       data => {
         this.trainedEmployees = data;
-        //console.log(data);
       }
     );
     

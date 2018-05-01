@@ -30,7 +30,6 @@ export class ViewAttendanceComponent implements OnInit {
               atnd => this.getAttendance(this, atnd)
           ))
           .then((results:any) => {
-            console.log(results);
             this.attendances = results;
           })
       }
@@ -53,7 +52,6 @@ export class ViewAttendanceComponent implements OnInit {
       thisObj.myHttp.getData('http://localhost:3009/employees/empDetailBriefId/'+tId).subscribe(
         (data:any) => {
           tId = data.fld_empFirstName+' '+data.fld_empLastName
-          //console.log(tId)
           resolve(tId);
         })
     })

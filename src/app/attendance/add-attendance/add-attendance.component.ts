@@ -16,7 +16,10 @@ export class AddAttendanceComponent implements OnInit {
     classConducted: 0,
     traineesPresent: [],
     traineesAbsent: []
-  };
+  };  
+  selectedItems = [];
+  dropdownList = [];
+  dropdownSettings = {};
   users :any;
   trainees :any;
   private sub: any;
@@ -50,6 +53,15 @@ export class AddAttendanceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dropdownSettings = {
+      singleSelection: false, 
+      text:"Select Attendees",
+      selectAllText:'Select All',
+      unSelectAllText:'UnSelect All',
+      enableSearchFilter: false,
+      primaryKey: "_id",
+      labelKey: "fld_empFirstName",
+    };            
     this.myHttp.getData('http://localhost:3000/trained-employee/?plan='+this.route.snapshot.params['id']).subscribe(
 			data => {
         this.trainees = data;
@@ -59,7 +71,8 @@ export class AddAttendanceComponent implements OnInit {
               tId => this.getEmployees(this, tId)
           ))
           .then((results:any) => {
-            this.users = results;
+            //this.users = results;
+            this.dropdownList = results;
             if(this.route.snapshot.routeConfig.path == 'attendance/view/:id/edit/:id2'){
               this.myHttp.getData('http://localhost:3000/attendance/'+this.route.snapshot.params['id2']).subscribe(
                 (data:any) => {
@@ -73,8 +86,17 @@ export class AddAttendanceComponent implements OnInit {
                   this.attendance.classConducted = data.classConducted;
                   if(this.attendance.classConducted == 1){
                     this.attendance.traineesPresent = [];
+                    this.dropdownList = [];
                   }else{
                     this.attendance.traineesPresent = data.traineesPresent;
+                    Promise
+                    .all(
+                      this.attendance.traineesPresent.map(
+                        tId => this.getEmployees(this, tId)
+                    ))
+                    .then((results:any) => {
+                      this.selectedItems = results
+                    })
                   }
                 }
               );
@@ -84,7 +106,7 @@ export class AddAttendanceComponent implements OnInit {
               this.attendance.classDate = {
                 year:	this.attendance.classDate.getFullYear(),
                 month:this.attendance.classDate.getMonth()+1,
-                day:	this.attendance.classDate.getDate()                 
+                day:	this.attendance.classDate.getDate()
               }
             }
           })
@@ -100,5 +122,21 @@ export class AddAttendanceComponent implements OnInit {
         })
     })
     return promise;
+  }
+
+  onItemSelect(item:any){
+    this.attendance.traineesPresent.push(item._id)
+  }
+  OnItemDeSelect(item:any){
+    this.attendance.traineesPresent = _.without(this.attendance.traineesPresent, item._id)
+  }
+  onSelectAll(items: any){
+    this.attendance.traineesPresent = []
+    items.forEach( item => 
+      this.attendance.traineesPresent.push(item._id)
+    )
+  }
+  onDeSelectAll(items: any){
+    this.attendance.traineesPresent = [];
   }
 }
