@@ -32,6 +32,14 @@ export class ViewEmployeeAttendanceComponent implements OnInit {
     this.employeeAttendance.trainee = "";
     this.myHttp.getData('http://localhost:3000/trained-employee?plan='+event.target.value+'&data=all').subscribe((data:any) => {
       this.trainees = data;
+      console.log(data)
+      Promise.all(									//delete previous trainees
+        this.trainees.map(
+          trainee => this.populateTrainee(trainee,this)
+        )
+      ).then(updatedData => {
+        this.trainees = updatedData;
+      })
     })
   }
 
@@ -40,5 +48,17 @@ export class ViewEmployeeAttendanceComponent implements OnInit {
       console.log(data);
       this.attendances = data;
     })
+  }
+
+  populateTrainee(trainee, thisObj) {
+    var promise = new Promise((resolve, reject) => {
+      thisObj.myHttp.getData('http://localhost:3009/employees/empDetailBriefId/'+trainee.trainee).subscribe(
+        data1 => {
+          trainee.traineeName = data1.fld_empFirstName+' '+data1.fld_empLastName;
+          resolve(trainee);
+        }
+      )
+    })
+    return promise;    
   }
 }

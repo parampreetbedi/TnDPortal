@@ -94,7 +94,7 @@ export class AddAttendanceComponent implements OnInit {
   
   getEmployees(thisObj,tId){
     var promise = new Promise((resolve, reject) => {
-      thisObj.myHttp.getData('http://localhost:3000/employee/'+tId).subscribe(
+      thisObj.myHttp.getData('http://localhost:3009/employees/empDetailBriefId/'+tId).subscribe(
         (data:any) => {
           resolve(data);
         })

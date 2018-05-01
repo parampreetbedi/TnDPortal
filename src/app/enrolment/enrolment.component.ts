@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 })
 export class EnrolmentComponent implements OnInit {
 
-  dashboard:any;
+  need:any;
   ongoing:any;
   completed:any;
   upcoming:any;
@@ -19,16 +19,44 @@ export class EnrolmentComponent implements OnInit {
   ngOnInit() {
     this.myHttp.getData('http://localhost:3000/plan/need').subscribe(
       data => {
-        this.dashboard = data;
+        this.need = data;
+        Promise.all(
+          this.need.map(
+            emp => this.getEmployees(this, emp)
+          )
+        ).then(
+          result => this.need = result
+        )
         this.myHttp.getData('http://localhost:3000/plan/completed').subscribe(
           completed => {
             this.completed = completed;
+            Promise.all(
+              this.completed.map(
+                emp => this.getEmployees(this, emp)
+              )
+            ).then(
+              result => this.completed = result
+            )
             this.myHttp.getData('http://localhost:3000/plan/ongoing').subscribe(
               ongoing => {
                 this.ongoing = ongoing;
+                Promise.all(
+                  this.ongoing.map(
+                    emp => this.getEmployees(this, emp)
+                  )
+                ).then(
+                  result => this.ongoing = result
+                )
                 this.myHttp.getData('http://localhost:3000/plan/upcoming').subscribe(
                   upcoming => {
                     this.upcoming = upcoming;
+                    Promise.all(
+                      this.upcoming.map(
+                        emp => this.getEmployees(this, emp)
+                      )
+                    ).then(
+                      result => this.upcoming = result
+                    )
                   }
                 );
               }
@@ -44,24 +72,30 @@ export class EnrolmentComponent implements OnInit {
       data => {
         this.myHttp.getData('http://localhost:3000/plan/need').subscribe(
           data1 => {
-            this.dashboard = data1;
+            this.need = data1;
             this.router.navigate(['/']);
           }
-        );  
+        );
       }
     );
   }
 
   enroll(id) {
-    // this.myHttp.patchData('http://localhost:3000/plan?id='+id+'&action=enroll',this.dashboard).subscribe(
-    //   data1 => {
-        this.myHttp.getData('http://localhost:3000/plan/need').subscribe(
-          data2 => {
-            this.dashboard = data2;
-            //this.router.navigate(['/plan/edit/'+id]);
-          }
-        );  
-      // }
-    //);
+    this.myHttp.getData('http://localhost:3000/plan/need').subscribe(
+      data2 => {
+        this.need = data2;
+      }
+    );
+  }
+
+  getEmployees(thisObj,emp){
+    var promise = new Promise((resolve, reject) => {
+      thisObj.myHttp.getData('http://localhost:3009/employees/empDetailBriefId/'+emp.trainer).subscribe(
+        (data:any) => {
+          emp.trainer = data.fld_empFirstName+' '+data.fld_empLastName
+          resolve(emp);
+        })
+    })
+    return promise;
   }
 }

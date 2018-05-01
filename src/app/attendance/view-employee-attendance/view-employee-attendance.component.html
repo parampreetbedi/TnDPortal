@@ -4,13 +4,13 @@
       <label for="inputEmail" class="col-lg-2 control-label" >Plan</label>
       <div class="col-lg-4">
         <select [(ngModel)]="employeeAttendance.plan" name="plan" (change)="loadTraineesAndPlanAttendance($event)">
-          <option *ngFor="let plan of plans" value="{{plan._id}}">{{plan.tech.name}} {{ plan.startDate | date:'dd-MM-yyyy'}}</option>
+          <option *ngFor="let plan of plans" value="{{plan._id}}">{{plan.tech.name}} {{ plan.startDate | date }}</option>
         </select>
       </div>
       <label for="inputEmail" class="col-lg-2 control-label" *ngIf="trainees.length" >Trainee</label>
       <div class="col-lg-4">
         <select [(ngModel)]="employeeAttendance.trainee" name="trainee" *ngIf="trainees.length" (change)="loadTraineeAttendance($event)">
-          <option *ngFor="let trainee of trainees" value="{{trainee.trainee._id}}">{{trainee.trainee.name}}</option>
+          <option *ngFor="let trainee of trainees" value="{{trainee.trainee}}">{{trainee.traineeName}}</option>
         </select>
       </div>
     </div>    

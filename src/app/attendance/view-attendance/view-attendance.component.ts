@@ -24,8 +24,39 @@ export class ViewAttendanceComponent implements OnInit {
     this.myHttp.getData('http://localhost:3000/attendance?plan='+this.route.snapshot.params['id']).subscribe(
       data => {
         this.attendances = data;
+        Promise
+          .all(
+            this.attendances.map(
+              atnd => this.getAttendance(this, atnd)
+          ))
+          .then((results:any) => {
+            console.log(results);
+            this.attendances = results;
+          })
       }
     );
   }
+  getAttendance(thisObj, atnd){
+    var promise = new Promise((resolve, reject) => {
+      Promise.all( atnd.traineesPresent.map(
+        trainee => thisObj.getEmployees(thisObj, trainee)
+      )).then(tp => {
+        atnd.traineesPresent = tp;
+        resolve(atnd)
+      })
+    })
+    return promise;
+  }
 
+  getEmployees(thisObj,tId){
+    var promise = new Promise((resolve, reject) => {
+      thisObj.myHttp.getData('http://localhost:3009/employees/empDetailBriefId/'+tId).subscribe(
+        (data:any) => {
+          tId = data.fld_empFirstName+' '+data.fld_empLastName
+          //console.log(tId)
+          resolve(tId);
+        })
+    })
+    return promise;
+  }
 }

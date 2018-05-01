@@ -18,7 +18,7 @@
       <td>{{att.traineesAbsent.length}}</td>
       <td>{{att.traineesPresent.length}}</td>
       <td>
-        <span *ngFor="let tp of att.traineesPresent">{{tp.name}}, </span>
+        <span *ngFor="let tp of att.traineesPresent">{{tp}}, </span>
       </td>
       <td>
         <a routerLink="edit/{{att._id}}">Edit Attendance</a>

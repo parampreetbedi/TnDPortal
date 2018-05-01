@@ -14,10 +14,28 @@ export class AttendanceComponent implements OnInit {
   constructor(private myHttp: MyHttpService, public router:Router) { }
 
   ngOnInit() {
-    this.myHttp.getData('http://localhost:3000/plan/ongoing').subscribe(
+    this.myHttp.getData('http://localhost:3000/plan/attendance').subscribe(
       data => {
         this.plans = data;
+        Promise
+          .all(
+            this.plans.map(
+              plan => this.getEmployees(this, plan)
+          )).then(employees => {
+            this.plans = employees
+          })
       }
     );
+  }
+
+  getEmployees(thisObj,plan){
+    var promise = new Promise((resolve, reject) => {
+      thisObj.myHttp.getData('http://localhost:3009/employees/empDetailBriefId/'+plan.trainer).subscribe(
+        (data:any) => {
+          plan.trainer = data.fld_empFirstName+' '+data.fld_empLastName;
+          resolve(plan);
+        })
+    })
+    return promise;
   }
 }

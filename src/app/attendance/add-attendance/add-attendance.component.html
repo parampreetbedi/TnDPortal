@@ -19,7 +19,7 @@
       <label for="inputEmail" class="col-lg-2 control-label" >Trainees Present</label>
       <div class="col-lg-10">
         <select [(ngModel)]="attendance.traineesPresent" name="traineesPresent" multiple>
-          <option *ngFor="let user of users" value="{{user._id}}">{{user.name}}</option>
+          <option *ngFor="let user of users" value="{{user._id}}">{{user.fld_empFirstName}} {{user.fld_empLastName}}</option>
         </select>
       </div>
     </div>

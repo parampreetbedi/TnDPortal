@@ -14,11 +14,11 @@
     <tr *ngFor="let plan of plans; let i = index">
       <td>{{i+1}}</td>
       <td>{{plan.tech.name}}</td>
-      <td>{{plan.trainer.name}}</td>
+      <td>{{plan.trainer}}</td>
       <td>{{plan.startDate | date}}</td>
       <td>{{plan.endDate!=0?(plan.endDate | date):''}}</td>
       <td>
-        <a routerLink="add/{{plan._id}}">Add Attendance</a>
+        <a *ngIf="plan.isCompleted==0" routerLink="add/{{plan._id}}">Add Attendance</a>
         <!-- <a routerLink="edit/{{plan._id}}">Edit Attendance</a> -->
         <a routerLink="view/{{plan._id}}">View Attendance</a>
       </td>
